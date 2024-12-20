@@ -3,7 +3,7 @@
 //
 
 #include "Grafo.h"
-#include <cstdio>
+#include <iostream>
 
 Grafo::Grafo() {
     primeiro = NULL;

@@ -3,7 +3,7 @@
 //
 
 #include "Vertice.h"
-#include <cstdio>
+#include <iostream>
 
 Vertice::Vertice() {
     peso = 1;
