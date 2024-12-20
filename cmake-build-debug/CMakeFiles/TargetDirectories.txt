@@ -1,0 +1,4 @@
+C:/Users/henri/CLionProjects/trabalho-grafos/cmake-build-debug/CMakeFiles/trabalho_grafos.dir
+C:/Users/henri/CLionProjects/trabalho-grafos/cmake-build-debug/CMakeFiles/lista-encadeada.dir
+C:/Users/henri/CLionProjects/trabalho-grafos/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/henri/CLionProjects/trabalho-grafos/cmake-build-debug/CMakeFiles/rebuild_cache.dir
