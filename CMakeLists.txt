@@ -10,4 +10,5 @@ add_executable(lista-encadeada
         src/lista-encadeada/Aresta.cpp
         src/lista-encadeada/Aresta.h
         src/lista-encadeada/Grafo.cpp
-        src/lista-encadeada/Grafo.h)
+        src/lista-encadeada/Grafo.h
+)
