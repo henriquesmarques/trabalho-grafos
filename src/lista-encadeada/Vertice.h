@@ -8,7 +8,7 @@
 
 class Vertice {
 public:
-    Vertice();
+    Vertice(int _id);
     ~Vertice();
     void setPeso(int val);
     int getPeso();
@@ -16,7 +16,9 @@ public:
     Vertice* getProx();
     void setAresta(Aresta* a);
     Aresta* getAresta();
+    int getId();
 private:
+    int id;
     int peso;
     Vertice* prox;
     Aresta* aresta;

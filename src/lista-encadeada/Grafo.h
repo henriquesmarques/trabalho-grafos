@@ -17,6 +17,10 @@ public:
     void setPrimeiro(Vertice* v);
     Vertice* getPrimeiro();
 
+    void carregaGrafo();
+    void inserirVertice(int id, int peso);
+    void inserirAresta(Vertice* inicio, Vertice* fim, int peso);
+
     /// Carrega_grafo       função que lê um arquivo txt com um grafo e carrega ele
     /// Eh_conexo*          função que diz se o grafo é conexo
     /// N_conexo            função que indica a quantidade de componentes conexas
@@ -25,7 +29,8 @@ public:
     /// Eh_direcionado      função que retorna se o grafo é direcionado ou não
     /// Aresta_ponderada    função que informa se as arestas do grafo tem peso
 private:
-    Vertice* primeiro;
+    Vertice* primeiroVertice;
+    Aresta* primeiraAresta;
 };
 
 #endif //GRAFO_H

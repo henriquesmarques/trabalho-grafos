@@ -5,7 +5,8 @@
 #include "Vertice.h"
 #include <iostream>
 
-Vertice::Vertice() {
+Vertice::Vertice(int _id) {
+    id = _id;
     peso = 1;
     prox = NULL;
     aresta = NULL;
@@ -41,4 +42,8 @@ void Vertice::setAresta(Aresta *a) {
 
 Aresta * Vertice::getAresta() {
     return aresta;
+}
+
+int Vertice::getId() {
+    return id;
 }
