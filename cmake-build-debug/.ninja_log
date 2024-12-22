@@ -1,7 +1,19 @@
 # ninja log v6
 24	1551	7565264647136254	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/main.cpp.obj	47b1fb3ac5afc9ed
-10	966	7565271420004529	CMakeFiles/trabalho_grafos.dir/main.cpp.obj	b8faf1a45c041c7d
-967	1120	7565271429576020	trabalho_grafos.exe	4431fcd2bc5ebc7e
-4	324	7565272344256546	build.ninja	381c1ab5dffebfcc
-8	1054	7565277804056076	CMakeFiles/trabalho_grafos.dir/main.cpp.obj	b8faf1a45c041c7d
-1054	1212	7565277814521077	trabalho_grafos.exe	4431fcd2bc5ebc7e
+11	2705	7565741514739272	CMakeFiles/trabalho_grafos.dir/main.cpp.obj	b8faf1a45c041c7d
+2706	3084	7565741541688008	trabalho_grafos.exe	4431fcd2bc5ebc7e
+4	324	7566100535073641	build.ninja	381c1ab5dffebfcc
+4	920	7566112894914897	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Vertice.cpp.obj	e87a0bc6ec28ba3a
+11	932	7566112894976470	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Aresta.cpp.obj	18e4821b1224fa46
+24	935	7566112895107662	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/main.cpp.obj	47b1fb3ac5afc9ed
+18	993	7566112895047048	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo.cpp.obj	dbe9b18490af45e4
+994	1333	7566112904810043	lista-encadeada.exe	337950593b480a50
+9	842	7566113444753109	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo.cpp.obj	dbe9b18490af45e4
+843	987	7566113453092578	lista-encadeada.exe	337950593b480a50
+16	729	7566115577233313	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/main.cpp.obj	47b1fb3ac5afc9ed
+9	801	7566115577161830	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo.cpp.obj	dbe9b18490af45e4
+801	941	7566115585073287	lista-encadeada.exe	337950593b480a50
+12	843	7566116196425839	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo.cpp.obj	dbe9b18490af45e4
+844	982	7566116204741655	lista-encadeada.exe	337950593b480a50
+9	844	7566116375862849	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo.cpp.obj	dbe9b18490af45e4
+845	987	7566116384217038	lista-encadeada.exe	337950593b480a50

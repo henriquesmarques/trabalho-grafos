@@ -1,10 +1,7 @@
-//
-// Created by henri on 20/12/2024.
-//
-
 #ifndef VERTICE_H
 #define VERTICE_H
-#include "Aresta.h"
+
+class Aresta;
 
 class Vertice {
 public:
@@ -14,9 +11,10 @@ public:
     int getPeso();
     void setProx(Vertice* v);
     Vertice* getProx();
+    int getId();
+
     void setAresta(Aresta* a);
     Aresta* getAresta();
-    int getId();
 private:
     int id;
     int peso;

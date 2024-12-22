@@ -1,7 +1,3 @@
-//
-// Created by henri on 20/12/2024.
-//
-
 #include "Grafo.h"
 #include <iostream>
 #include <fstream>
@@ -10,6 +6,7 @@ using namespace std;
 
 Grafo::Grafo() {
     primeiroVertice = NULL;
+    primeiraAresta = NULL;
 }
 
 Grafo::~Grafo() {
@@ -17,6 +14,12 @@ Grafo::~Grafo() {
         Vertice* p = primeiroVertice->getProx();
         delete primeiroVertice;
         primeiroVertice = p;
+    }
+
+    while (primeiraAresta != NULL) {
+        Aresta* a = primeiraAresta->getProx();
+        delete primeiraAresta;
+        primeiraAresta = a;
     }
 }
 
@@ -53,6 +56,8 @@ void Grafo::carregaGrafo() {
         }
     }
 
+    imprimirVertices();
+
     // Criar arestas
     int origem, destino, peso;
     while (arquivo >> origem >> destino) {
@@ -79,8 +84,9 @@ void Grafo::carregaGrafo() {
         } else {
             cout << "Erro ao inserir arquivo" << endl;
         }
-
     }
+
+    imprimirArestas();
     arquivo.close();
 }
 
@@ -102,4 +108,23 @@ void Grafo::inserirAresta(Vertice *inicio, Vertice *fim, int peso) {
         a->setProx(primeiraAresta);
     }
     primeiraAresta = a;
+}
+
+void Grafo::imprimirVertices() {
+    cout << "Lista de vertices: ";
+    Vertice* v = primeiroVertice;
+    while (v != NULL) {
+        cout << v->getId() << " ";
+        v = v->getProx();
+    }
+    cout << endl;
+}
+
+void Grafo::imprimirArestas() {
+    cout << "Lista de arestas: " << endl;
+    Aresta* a = primeiraAresta;
+    while (a != NULL) {
+        cout << a->getInicio()->getId() << " -> " << a->getFim()->getId() << " Peso: " << a->getPeso() << endl;
+        a = a->getProx();
+    }
 }

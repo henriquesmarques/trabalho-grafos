@@ -1,15 +1,13 @@
-//
-// Created by henri on 20/12/2024.
-//
-
 #include "Aresta.h"
+#include "Vertice.h"
 #include <iostream>
 
 using namespace std;
 
 Aresta::Aresta() {
     peso = 1;
-    fim = inicio = NULL;
+    fim = NULL;
+    inicio = NULL;
     prox = NULL;
 }
 

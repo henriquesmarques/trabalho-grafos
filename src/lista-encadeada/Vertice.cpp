@@ -1,9 +1,8 @@
-//
-// Created by henri on 20/12/2024.
-//
-
 #include "Vertice.h"
+#include "Aresta.h"
 #include <iostream>
+
+using namespace std;
 
 Vertice::Vertice(int _id) {
     id = _id;
@@ -13,11 +12,6 @@ Vertice::Vertice(int _id) {
 }
 
 Vertice::~Vertice() {
-    while (aresta != NULL) {
-        Aresta* p = aresta->getProx();
-        delete aresta;
-        aresta = p;
-    }
 }
 
 void Vertice::setPeso(int val) {

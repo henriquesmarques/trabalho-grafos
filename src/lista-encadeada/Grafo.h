@@ -1,10 +1,8 @@
-//
-// Created by henri on 20/12/2024.
-//
-
 #ifndef GRAFO_H
 #define GRAFO_H
+
 #include "Vertice.h"
+#include "Aresta.h"
 
 // Os grafos não devem aceitar arestas múltiplas ou laços
 // Uso de lista encadeada tanto para vertices quanto arestas usando alocação dinâmica
@@ -20,6 +18,8 @@ public:
     void carregaGrafo();
     void inserirVertice(int id, int peso);
     void inserirAresta(Vertice* inicio, Vertice* fim, int peso);
+    void imprimirVertices();
+    void imprimirArestas();
 
     /// Carrega_grafo       função que lê um arquivo txt com um grafo e carrega ele
     /// Eh_conexo*          função que diz se o grafo é conexo
