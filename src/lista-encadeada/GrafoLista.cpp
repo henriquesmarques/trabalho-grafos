@@ -113,8 +113,6 @@ void GrafoLista::inserirVertice(int id, int peso) {
 void GrafoLista::inserirAresta(Vertice *inicio, Vertice *fim, int peso) {
     if (inicio == fim) {
         cout << "Erro: o grafo não permite inserir laço." << endl;
-    } else if (inicio->getArestas() != nullptr) {
-        cout << "Erro: o grafo não permite arestas múltiplas." << endl;
     } else {
         // Criando aresta
         Aresta* a = new Aresta();
@@ -123,7 +121,10 @@ void GrafoLista::inserirAresta(Vertice *inicio, Vertice *fim, int peso) {
         a->setFim(fim);
 
         // Adicionando ponteiro da aresta no vértice
-        inicio->setArestas(a);
+        inicio->inserirAresta(a);
+        if (!ehDirecionado()) {
+            fim->inserirAresta(a);
+        }
 
         // Adicionando aresta na lista
         if (raizAresta != nullptr) {
