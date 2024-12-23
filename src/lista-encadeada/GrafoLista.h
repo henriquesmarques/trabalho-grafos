@@ -14,10 +14,10 @@ class GrafoLista {
 public:
     GrafoLista();
     ~GrafoLista();
-    void setPrimeiroVertice(Vertice* v);
-    Vertice* getPrimeiroVertice();
-    void setPrimeiraAresta(Aresta* a);
-    Aresta* getPrimeiraAresta();
+    void setRaizVertice(Vertice* v);
+    Vertice* getRaizVertice();
+    void setRaizAresta(Aresta* a);
+    Aresta* getRaizAresta();
 
     void carregaGrafo(); /// Função que lê um arquivo txt com um grafo e carrega ele
     void inserirVertice(int id, int peso);

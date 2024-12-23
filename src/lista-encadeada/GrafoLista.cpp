@@ -24,19 +24,19 @@ GrafoLista::~GrafoLista() {
     }
 }
 
-void GrafoLista::setPrimeiroVertice(Vertice *v) {
+void GrafoLista::setRaizVertice(Vertice *v) {
     raizVertice = v;
 }
 
-Vertice * GrafoLista::getPrimeiroVertice() {
+Vertice * GrafoLista::getRaizVertice() {
     return raizVertice;
 }
 
-void GrafoLista::setPrimeiraAresta(Aresta *a) {
+void GrafoLista::setRaizAresta(Aresta *a) {
     raizAresta = a;
 }
 
-Aresta * GrafoLista::getPrimeiraAresta() {
+Aresta * GrafoLista::getRaizAresta() {
     return raizAresta;
 }
 
@@ -97,7 +97,7 @@ void GrafoLista::carregaGrafo() {
         }
     }
 
-    imprimirArestas();
+    //imprimirArestas();
     arquivo.close();
 }
 
@@ -111,20 +111,28 @@ void GrafoLista::inserirVertice(int id, int peso) {
 }
 
 void GrafoLista::inserirAresta(Vertice *inicio, Vertice *fim, int peso) {
-    // Criando aresta
-    Aresta* a = new Aresta();
-    a->setPeso(peso);
-    a->setInicio(inicio);
-    a->setFim(fim);
+    if (inicio == fim) {
+        cout << "Erro: o grafo não permite inserir laço." << endl;
+    } else if (inicio->getArestas() != nullptr) {
+        cout << "Erro: o grafo não permite arestas múltiplas." << endl;
+    } else {
+        // Criando aresta
+        Aresta* a = new Aresta();
+        a->setPeso(peso);
+        a->setInicio(inicio);
+        a->setFim(fim);
 
-    // Adicionando ponteiro da aresta no vértice
-    inicio->setArestas(a);
+        // Adicionando ponteiro da aresta no vértice
+        inicio->setArestas(a);
 
-    // Adicionando aresta na lista
-    if (raizAresta != nullptr) {
-        a->setProx(raizAresta);
+        // Adicionando aresta na lista
+        if (raizAresta != nullptr) {
+            a->setProx(raizAresta);
+        }
+        raizAresta = a;
+
+        cout << "Aresta inserida: " << a->getInicio()->getId() << " -> " << a->getFim()->getId() << endl;
     }
-    raizAresta = a;
 }
 
 void GrafoLista::imprimirVertices() {
@@ -167,15 +175,40 @@ int GrafoLista::getOrdem() {
     return ordem;
 }
 
-bool GrafoLista::ehConexo() {
-    int tam = getOrdem();
-    Vertice* visitados[tam];
-    visitados[0] = raizVertice;
-
-    if (visitados[0]->getAresta() != nullptr)
-        visitados[1] = visitados[0]->getAresta()->getFim();
-}
-
 bool GrafoLista::ehDirecionado() {
     return direcionado;
+}
+
+// Algoritmo de força bruta
+bool GrafoLista::ehConexo() {
+    int tam = getOrdem();
+    Vertice* v = raizVertice;
+
+    // v percorre todos os vértices do grafo
+    while(v != nullptr) {
+        Vertice *p = v;
+
+        // preence o vetor visitados com false
+        bool visitados[tam];
+        for (int k = 0; k < tam; k++)
+            visitados[k] = false;
+
+        int i = 0;
+
+        // preenche os vértices acessados por v
+        while (p->getArestas() != nullptr && i < tam) {
+            visitados[p->getId()-1] = true;
+            p = p->getArestas()->getFim();
+            i++;
+        }
+
+        // verifica se algum vértice não foi acessado
+        for (int j = 0; j < tam; j++)
+            if (!visitados[j])
+                return false;
+
+        v = v->getProx();
+    }
+
+    return true;
 }

@@ -13,7 +13,17 @@ int main() {
     else
         cout << "Arestas nao ponderadas." << endl;
 
-    cout << "Ordem do grafo: " << g.getOrdem();
+    cout << "Ordem do grafo: " << g.getOrdem() << endl;
+
+    if (g.ehDirecionado())
+        cout << "Eh direcionado." << endl;
+    else
+        cout << "Nao eh direcionado." << endl;
+
+    if (g.ehConexo())
+        cout << "Eh conexo." << endl;
+    else
+        cout << "Nao eh conexo." << endl;
 
     return 0;
 }
