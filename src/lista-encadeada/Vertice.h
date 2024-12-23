@@ -14,7 +14,7 @@ public:
     Vertice* getProx();
     int getId();
     void inserirAresta(Aresta* a);
-    Aresta** getArestas();
+    Aresta* getAresta(int i);
     int totalArestas();
 private:
     int id;

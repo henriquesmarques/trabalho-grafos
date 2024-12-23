@@ -33,8 +33,14 @@ int Vertice::getId() {
     return id;
 }
 
-Aresta** Vertice::getArestas() {
-    return arestas;
+Aresta* Vertice::getAresta(int i) {
+    if (i >= 0 && i < n) {
+        return arestas[i];
+    }
+    else {
+        cout << "Erro get: indice invalido." << endl;
+        exit(1);
+    }
 }
 
 void Vertice::inserirAresta(Aresta *a) {
