@@ -14,6 +14,7 @@ Vertice::Vertice(int _id) {
 }
 
 Vertice::~Vertice() {
+    delete [] arestas;
 }
 
 void Vertice::setPeso(int val) {

@@ -14,29 +14,26 @@ class GrafoLista {
 public:
     GrafoLista();
     ~GrafoLista();
-    void setRaizVertice(Vertice* v);
-    Vertice* getRaizVertice();
-    void setRaizAresta(Aresta* a);
-    Aresta* getRaizAresta();
-
     void carregaGrafo(); /// Função que lê um arquivo txt com um grafo e carrega ele
-    void inserirVertice(int id, int peso);
-    void inserirAresta(Vertice* inicio, Vertice* fim, int peso);
-    void imprimirVertices();
-    void imprimirArestas();
     bool arestaPonderada(); /// Função que informa se as arestas do grafo tem peso
     int getOrdem(); /// Função que retorna a ordem do grafo
-    bool ehConexo(); /// Função que diz se o grafo é conexo ou não
     bool ehDirecionado(); /// Função que retorna se o grafo é direcionado ou não
-
-    // bool ehCiclico(); /// Função que retorna se o grafo é cíclico ou não
-    /// Eh_arvore           função que diz se o grafo é uma árvore
-    /// N_conexo            função que indica a quantidade de componentes conexas
+    bool ehArvore(); /// Função que diz se o grafo é uma árvore
+    int nConexo(); /// Função que indica a quantidade de componentes conexas
 private:
     Vertice* raizVertice;
     Aresta* raizAresta;
     bool direcionado;
+
+    void inserirVertice(int id, int peso);
+    void inserirAresta(Vertice* inicio, Vertice* fim, int peso);
+    void imprimirVertices();
+    void imprimirArestas();
+    bool ehConexo(); /// Função que diz se o grafo é conexo ou não
+    bool ehCiclico(); /// Função que retorna se o grafo é cíclico ou não
     void auxEhConexo(bool *visitados, Vertice *v);
+    bool auxEhCiclico(Vertice* v, bool* visitados, Vertice* pai);
+    void auxNConexo(bool *visitados, Vertice *v);
 };
 
 #endif //GRAFO_H
