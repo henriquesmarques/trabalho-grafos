@@ -135,12 +135,12 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "src/lista-encadeada/Grafo.cpp",
+			"path" : "src/lista-encadeada/GrafoLista.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{
 			"backtrace" : 1,
-			"path" : "src/lista-encadeada/Grafo.h",
+			"path" : "src/lista-encadeada/GrafoLista.h",
 			"sourceGroupIndex" : 1
 		},
 		{

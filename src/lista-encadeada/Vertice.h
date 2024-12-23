@@ -1,5 +1,6 @@
 #ifndef VERTICE_H
 #define VERTICE_H
+#include "Aresta.h"
 
 class Aresta;
 
@@ -12,14 +13,13 @@ public:
     void setProx(Vertice* v);
     Vertice* getProx();
     int getId();
-
-    void setAresta(Aresta* a);
-    Aresta* getAresta();
+    void setArestas(Aresta* a);
+    Aresta* getArestas();
 private:
     int id;
     int peso;
     Vertice* prox;
-    Aresta* aresta;
+    Aresta* arestas;
 };
 
 #endif //VERTICE_H

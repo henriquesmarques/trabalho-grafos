@@ -1,14 +1,13 @@
 #include "Aresta.h"
-#include "Vertice.h"
 #include <iostream>
 
 using namespace std;
 
 Aresta::Aresta() {
     peso = 1;
-    fim = NULL;
-    inicio = NULL;
-    prox = NULL;
+    fim = nullptr;
+    inicio = nullptr;
+    prox = nullptr;
 }
 
 Aresta::~Aresta() {

@@ -1,19 +1,9 @@
 # ninja log v6
-24	1551	7565264647136254	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/main.cpp.obj	47b1fb3ac5afc9ed
+26	974	7566141032332377	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/main.cpp.obj	47b1fb3ac5afc9ed
 11	2705	7565741514739272	CMakeFiles/trabalho_grafos.dir/main.cpp.obj	b8faf1a45c041c7d
+9	938	7566141032159163	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Vertice.cpp.obj	e87a0bc6ec28ba3a
+15	916	7566141032220986	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Aresta.cpp.obj	18e4821b1224fa46
 2706	3084	7565741541688008	trabalho_grafos.exe	4431fcd2bc5ebc7e
-4	324	7566100535073641	build.ninja	381c1ab5dffebfcc
-4	920	7566112894914897	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Vertice.cpp.obj	e87a0bc6ec28ba3a
-11	932	7566112894976470	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Aresta.cpp.obj	18e4821b1224fa46
-24	935	7566112895107662	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/main.cpp.obj	47b1fb3ac5afc9ed
-18	993	7566112895047048	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo.cpp.obj	dbe9b18490af45e4
-994	1333	7566112904810043	lista-encadeada.exe	337950593b480a50
-9	842	7566113444753109	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo.cpp.obj	dbe9b18490af45e4
-843	987	7566113453092578	lista-encadeada.exe	337950593b480a50
-16	729	7566115577233313	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/main.cpp.obj	47b1fb3ac5afc9ed
-9	801	7566115577161830	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo.cpp.obj	dbe9b18490af45e4
-801	941	7566115585073287	lista-encadeada.exe	337950593b480a50
-12	843	7566116196425839	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo.cpp.obj	dbe9b18490af45e4
-844	982	7566116204741655	lista-encadeada.exe	337950593b480a50
-9	844	7566116375862849	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo.cpp.obj	dbe9b18490af45e4
-845	987	7566116384217038	lista-encadeada.exe	337950593b480a50
+1022	1164	7566141042290127	lista-encadeada.exe	337950593b480a50
+4	324	7566618459330456	build.ninja	381c1ab5dffebfcc
+21	1022	7566141032281501	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo.cpp.obj	dbe9b18490af45e4

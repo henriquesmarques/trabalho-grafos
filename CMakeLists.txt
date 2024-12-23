@@ -9,7 +9,7 @@ add_executable(lista-encadeada
         src/lista-encadeada/Vertice.h
         src/lista-encadeada/Aresta.cpp
         src/lista-encadeada/Aresta.h
-        src/lista-encadeada/Grafo.cpp
-        src/lista-encadeada/Grafo.h
+        src/lista-encadeada/GrafoLista.cpp
+        src/lista-encadeada/GrafoLista.h
         src/lista-encadeada/main.cpp
 )
