@@ -8,6 +8,9 @@ Vertice::Vertice(int _id) {
     peso = 1;
     prox = nullptr;
     arestas = nullptr;
+    n = 0;
+    tam = 10;
+    arestas = new Aresta*[tam];
 }
 
 Vertice::~Vertice() {

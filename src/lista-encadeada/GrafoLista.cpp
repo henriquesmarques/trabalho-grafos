@@ -180,48 +180,35 @@ bool GrafoLista::ehDirecionado() {
     return direcionado;
 }
 
-// Algoritmo de força bruta
-bool GrafoLista::ehConexo() {
-    int tam = getOrdem();
-    Vertice* v = raizVertice;
-
-    if (ehDirecionado()) {
-        // v percorre todos os vértices do grafo
-        while(v != nullptr) {
-            Vertice *p = v;
-
-            // preenche o vetor visitados com false
-            bool visitados[tam];
-            for (int k = 0; k < tam; k++)
-                visitados[k] = false;
-
-            int i = 0;
-
-            // preenche os vértices acessados por v
-            while (p->getArestas() != nullptr && i < tam) {
-                visitados[p->getId()-1] = true;
-                p = p->getArestas()->getFim();
-                i++;
-            }
-
-            // verifica se algum vértice não foi acessado
-            for (int j = 0; j < tam; j++)
-                if (!visitados[j])
-                    return false;
-
-            v = v->getProx();
+void GrafoLista::auxEhConexo(bool *visitados, Vertice *v) {
+    visitados[v->getId() - 1] = true;
+    for (int i = 0; i < v->totalArestas(); ++i) {
+        Aresta* a = v->getAresta(i);
+        Vertice* adj = a->getFim();
+        if (!visitados[adj->getId() - 1]) {
+            auxEhConexo(visitados, adj);
         }
-        return true;
+    }
+}
+
+bool GrafoLista::ehConexo() {
+    int numVertices = getOrdem();
+    if (numVertices == 0) return true;
+
+    bool *visitados = new bool[numVertices];
+    for (int i = 0; i < numVertices; ++i) {
+        visitados[i] = false;
     }
 
-    int i = tam-1;
+    auxEhConexo(visitados, raizVertice);
 
-    while (v->getArestas() != nullptr && i > 0) {
-        v = v->getArestas()->getFim();
-        i--;
+    for (int i = 0; i < numVertices; ++i) {
+        if (!visitados[i]) {
+            delete[] visitados;
+            return false;
+        }
     }
 
-    if (i > 0)
-        return false;
+    delete[] visitados;
     return true;
 }

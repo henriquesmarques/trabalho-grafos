@@ -36,6 +36,7 @@ private:
     Vertice* raizVertice;
     Aresta* raizAresta;
     bool direcionado;
+    void auxEhConexo(bool *visitados, Vertice *v);
 };
 
 #endif //GRAFO_H
