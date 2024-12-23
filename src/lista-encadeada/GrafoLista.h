@@ -26,9 +26,10 @@ public:
     void imprimirArestas();
     bool arestaPonderada(); /// Função que informa se as arestas do grafo tem peso
     int getOrdem(); /// Função que retorna a ordem do grafo
-    bool ehConexo(); /// Função que diz se o grafo é conexo
+    bool ehConexo(); /// Função que diz se o grafo é conexo ou não
     bool ehDirecionado(); /// Função que retorna se o grafo é direcionado ou não
 
+    // bool ehCiclico(); /// Função que retorna se o grafo é cíclico ou não
     /// Eh_arvore           função que diz se o grafo é uma árvore
     /// N_conexo            função que indica a quantidade de componentes conexas
 private:

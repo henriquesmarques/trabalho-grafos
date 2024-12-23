@@ -13,13 +13,18 @@ public:
     void setProx(Vertice* v);
     Vertice* getProx();
     int getId();
-    void setArestas(Aresta* a);
-    Aresta* getArestas();
+    void inserirAresta(Aresta* a);
+    Aresta** getArestas();
+    int totalArestas();
 private:
     int id;
     int peso;
     Vertice* prox;
-    Aresta* arestas;
+
+    Aresta** arestas; /// Vetor de ponteiros de Arestas
+    int n; /// Total de arestas
+    int tam; /// Tamanho do vetor
+    void aumentarVetor();
 };
 
 #endif //VERTICE_H

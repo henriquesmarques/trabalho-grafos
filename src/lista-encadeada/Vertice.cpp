@@ -33,10 +33,28 @@ int Vertice::getId() {
     return id;
 }
 
-void Vertice::setArestas(Aresta *a) {
-    arestas = a;
+Aresta** Vertice::getArestas() {
+    return arestas;
 }
 
-Aresta * Vertice::getArestas() {
-    return arestas;
+void Vertice::inserirAresta(Aresta *a) {
+    if (n >= tam) {
+        aumentarVetor();
+    }
+    arestas[n] = a;
+    n++;
+}
+
+void Vertice::aumentarVetor() {
+    Aresta **a = new Aresta*[tam+10];
+    for (int i = 0; i < tam; i++) {
+        a[i] = arestas[i];
+    }
+    delete [] arestas;
+    arestas = a;
+    tam += 10;
+}
+
+int Vertice::totalArestas() {
+    return n;
 }

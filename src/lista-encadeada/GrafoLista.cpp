@@ -184,31 +184,43 @@ bool GrafoLista::ehConexo() {
     int tam = getOrdem();
     Vertice* v = raizVertice;
 
-    // v percorre todos os vértices do grafo
-    while(v != nullptr) {
-        Vertice *p = v;
+    if (ehDirecionado()) {
+        // v percorre todos os vértices do grafo
+        while(v != nullptr) {
+            Vertice *p = v;
 
-        // preence o vetor visitados com false
-        bool visitados[tam];
-        for (int k = 0; k < tam; k++)
-            visitados[k] = false;
+            // preenche o vetor visitados com false
+            bool visitados[tam];
+            for (int k = 0; k < tam; k++)
+                visitados[k] = false;
 
-        int i = 0;
+            int i = 0;
 
-        // preenche os vértices acessados por v
-        while (p->getArestas() != nullptr && i < tam) {
-            visitados[p->getId()-1] = true;
-            p = p->getArestas()->getFim();
-            i++;
+            // preenche os vértices acessados por v
+            while (p->getArestas() != nullptr && i < tam) {
+                visitados[p->getId()-1] = true;
+                p = p->getArestas()->getFim();
+                i++;
+            }
+
+            // verifica se algum vértice não foi acessado
+            for (int j = 0; j < tam; j++)
+                if (!visitados[j])
+                    return false;
+
+            v = v->getProx();
         }
-
-        // verifica se algum vértice não foi acessado
-        for (int j = 0; j < tam; j++)
-            if (!visitados[j])
-                return false;
-
-        v = v->getProx();
+        return true;
     }
 
+    int i = tam-1;
+
+    while (v->getArestas() != nullptr && i > 0) {
+        v = v->getArestas()->getFim();
+        i--;
+    }
+
+    if (i > 0)
+        return false;
     return true;
 }
