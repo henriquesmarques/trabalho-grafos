@@ -280,11 +280,16 @@ void GrafoLista::auxNConexo(bool *visitados, Vertice *v) {
 void GrafoLista::removerAresta(Aresta* a) {
     Vertice* v = a->getInicio();
     v->removerAresta(a);
-
     if (direcionado != true) {
         v = a->getFim();
         v->removerAresta(a);
     }
+
+    Aresta* ant = raizAresta;
+    while (ant->getProx() != a) {
+        ant = ant->getProx();
+    }
+    ant->setProx(a->getProx());
 
     delete a;
 }
