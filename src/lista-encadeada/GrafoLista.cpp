@@ -276,3 +276,15 @@ void GrafoLista::auxNConexo(bool *visitados, Vertice *v) {
         }
     }
 }
+
+void GrafoLista::removerAresta(Aresta* a) {
+    Vertice* v = a->getInicio();
+    v->removerAresta(a);
+
+    if (direcionado != true) {
+        v = a->getFim();
+        v->removerAresta(a);
+    }
+
+    delete a;
+}

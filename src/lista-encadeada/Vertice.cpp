@@ -68,3 +68,27 @@ void Vertice::aumentarVetor() {
 int Vertice::totalArestas() {
     return n;
 }
+
+void Vertice::removerAresta(Aresta* a) {
+    // Encontrar posição da aresta no vetor
+    int i = 0;
+    for (i = 0; i < n; i++) {
+        if (arestas[i] == a) {
+            break;
+        }
+    }
+    // Verificar se a aresta foi encontrada
+    if (i == n) {
+        cout << "Erro: Aresta não encontrada." << endl;
+        exit(1);
+    } else {
+        cout << "Aresta encontrada na posição " << i << " do vetor." << endl;
+    }
+    // Reorganizando vetor
+    for (int j = i; j < n-1; j++) {
+        arestas[j] = arestas[j+1];
+    }
+    n--;
+
+    cout << "Aresta removida." << endl;
+}

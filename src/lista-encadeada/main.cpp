@@ -20,10 +20,16 @@ int main() {
     else
         cout << "Nao eh direcionado." << endl;
 
-    if (g.ehConexo())
-        cout << "Eh conexo." << endl;
+    int n = g.nConexo();
+    if (n > 0)
+        cout << "Eh " << n << "-conexo." << endl;
     else
         cout << "Nao eh conexo." << endl;
+
+    if (g.ehArvore())
+        cout << "Eh arvore." << endl;
+    else
+        cout << "Nao eh arvore." << endl;
 
     return 0;
 }

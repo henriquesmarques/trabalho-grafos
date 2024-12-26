@@ -65,3 +65,7 @@
 509	607	7566832519903093	lista-encadeada.exe	6a7268b171f5c96d
 6	466	7566832752765238	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/main.cpp.obj	47b1fb3ac5afc9ed
 467	556	7566832757368461	lista-encadeada.exe	6a7268b171f5c96d
+6	641	7566852804869993	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Vertice.cpp.obj	e87a0bc6ec28ba3a
+15	652	7566852804951515	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/main.cpp.obj	47b1fb3ac5afc9ed
+11	714	7566852804910724	CMakeFiles/lista-encadeada.dir/src/lista-encadeada/GrafoLista.cpp.obj	d3bd00365c245c01
+714	814	7566852811943450	lista-encadeada.exe	6a7268b171f5c96d

@@ -24,13 +24,13 @@ private:
     Vertice* raizVertice;
     Aresta* raizAresta;
     bool direcionado;
-
+    void removerAresta(Aresta* a);
     void inserirVertice(int id, int peso);
     void inserirAresta(Vertice* inicio, Vertice* fim, int peso);
     void imprimirVertices();
     void imprimirArestas();
-    bool ehConexo(); /// Função que diz se o grafo é conexo ou não
-    bool ehCiclico(); /// Função que retorna se o grafo é cíclico ou não
+    bool ehConexo();
+    bool ehCiclico();
     void auxEhConexo(bool *visitados, Vertice *v);
     bool auxEhCiclico(Vertice* v, bool* visitados, Vertice* pai);
     void auxNConexo(bool *visitados, Vertice *v);
