@@ -1,5 +1,9 @@
-#include "Vertice.h"
+//
+// Created by gomes on 25/12/2024.
+//
 #include <iostream>
+
+#include "Vertice.h"
 
 using namespace std;
 
@@ -11,6 +15,11 @@ Vertice::Vertice(int _id) {
     n = 0;
     tam = 10;
     arestas = new Aresta*[tam];
+    listaAresta = nullptr;
+    cor = Coloracao::SEMCOR;
+    visitado = false;
+    disc = -1;
+    low = -1;
 }
 
 Vertice::~Vertice() {
@@ -69,7 +78,14 @@ int Vertice::totalArestas() {
     return n;
 }
 
-void Vertice::removerAresta(Aresta* a) {
+void Vertice::setCorVisita(Coloracao _cor) {
+    cor = _cor;
+}
+Coloracao Vertice::getVisitado() {
+    return cor;
+}
+void Vertice::removerAresta(Aresta* a)
+{
     // Encontrar posição da aresta no vetor
     int i = 0;
     for (i = 0; i < n; i++) {
@@ -91,4 +107,14 @@ void Vertice::removerAresta(Aresta* a) {
     n--;
 
     cout << "Aresta removida." << endl;
+}
+
+Aresta* Vertice::getArestaPara(Vertice* destino) {
+    for (int i = 0; i < totalArestas(); ++i) {
+        Aresta* a = getAresta(i);
+        if (a->getFim() == destino) {
+            return a;
+        }
+    }
+    return nullptr; // Retorna nullptr se nenhuma aresta conectar os dois vértices
 }
