@@ -1,11 +1,8 @@
 #include "GrafoLista.h"
-#include "Coloracao.h"
 #include <iostream>
 #include <fstream>
 #include <cmath>
-#include <cstdlib>
 
-#include <string>
 using namespace std;
 
 
@@ -48,53 +45,60 @@ bool GrafoLista::ehCompleto() {
         }
         v = v->getProx();
     }
-    return true;
+
+    if (grauGrafo == getOrdem()-1)
+        return true;
+    return false;
 }
 bool GrafoLista::ehBipartido() {
     /// eh bipartido se seus vértices puderem ser divididos em dois conjuntos disjuntos,
     /// de forma que não haja arestas entre vértices do mesmo conjunto
     if (ehCompleto())
         return false;
-    for (int i=0; i<getOrdem(); i++)
-        vertices[i]->setCorVisita(Coloracao::SEMCOR);
-
-    for (int i = 0; i < getOrdem(); i++) {
-        if (vertices[i]->getVisitado() == Coloracao::SEMCOR) {
-            if (!auxEhBipartido(vertices[i],Coloracao::AZUL))
+    int n = getOrdem();
+    int *cor = new int[n];
+    ///Inicializa todos como sem cor = -1
+    for (int i=0;i<n;i++)
+        cor[i]=-1;
+    for (int i=0; i<n; i++) {
+        if (cor[i]==-1) { ///vertice nãoo visitado
+            if (!auxEhBipartido(i, 0, cor)) {
+                delete [] cor;
+                return false;
+            }
+        }
+    }
+    delete [] cor;
+    return true;
+}
+bool GrafoLista::auxEhBipartido(int i, int c, int *cor) {
+    cor[i]=c; ///colore o vertice U com a cor c
+    for ( Vertice* vizinho = buscaVertice(i); vizinho!= nullptr; vizinho=vizinho->getProx()) {
+        int id = vizinho->getId();
+        if (cor[id]==-1) {
+            ///se o vertice não foi visitado
+            if (!auxEhBipartido(id, 1-c, cor)) ///se não for possivel colorir com a cor oposta
                 return false;
         }
-        return true;
-    }
-}
-bool GrafoLista::auxEhBipartido(Vertice* v, Coloracao cor) {
-        v->setCorVisita(cor);
-        Coloracao corOposta = (cor == Coloracao::AZUL) ? Coloracao::VERDE : Coloracao::AZUL;
-        Aresta* a = v->listaAresta;
-        while (a != nullptr) {
-            Vertice* adj = a->getFim();
-            if (adj->getVisitado() == Coloracao::SEMCOR) {
-                if (!auxEhBipartido(adj, corOposta))
-                    return false;
-            } else if (adj->getVisitado() != corOposta) {
+        else if (cor[id] == c) ///se vizinhos possuem a mesma cor
                 return false;
-            } a = a->getProx();
-        } return true;
+    }
+    return true;
 }
+
 bool GrafoLista::possuiArticulacao() {
     ///definição: se retira um vertice, aumenta o numero de componentes conexas;
-
     ///um grafo completo se retirado um vertice não aumenta o numero de componentes conexas
     if (ehCompleto())
         return false;
     ///calcula o numero de componentes conexas;
     int componentesConexas = nConexo();
-
     Vertice* v = raizVertice;
     ///laco para realizar a remoção de um no por vez no grafo
     for (int i=0; i<getOrdem(); i++) {
         GrafoLista* grafo = copiarGrafo(); ///a cada iteração faz a copia grafo
         if (grafo->auxArticulacao(v, componentesConexas))///chama a funcao auxiliar para o vertice do grafo copiado
-            {
+        {
             delete grafo;
             return true;
         }
@@ -109,6 +113,7 @@ bool GrafoLista::auxArticulacao(Vertice *v, int comp) {
     int comp2 = nConexo(); ///contabiliza o numero de componentes apos a remocao
     return comp2 > comp;
 }
+
 void GrafoLista::retiraVertice(int id){
         Vertice* p = raizVertice;
         Vertice* aux = nullptr;
@@ -154,15 +159,18 @@ Aresta* GrafoLista::buscaAresta(int vert1, int vert2){
     }
     return aux;
 }
-Vertice* GrafoLista::buscaVertice(int info){
+Vertice* GrafoLista::buscaVertice(int id){
     Vertice* p = raizVertice;
     while(p != nullptr){
-        if( p->getId() == info)
+        if( p->getId() == id)
             return p;
         p = p->getProx();
     }
     return p;
 }
+
+
+
 bool GrafoLista::possuiPonte() {
     ///definição: se retira uma aresta, aumenta o numero de componentes conexas;
     ///um grafo completo se retirado um vertice não aumenta o numero de componentes conexas
@@ -195,6 +203,27 @@ bool GrafoLista::auxPonte(Vertice *v, int comp){
     }
     return false;
 }
+void GrafoLista::removerAresta(Aresta* a) {
+        Vertice* v = a->getInicio();
+        v->removerAresta(a);
+        if (direcionado != true) {
+            v = a->getFim();
+            v->removerAresta(a);
+        }
+
+        if (raizAresta == a) {
+            raizAresta = a->getProx();
+            delete a;
+        } else {
+            Aresta* ant = raizAresta;
+            while (ant->getProx() != a) {
+                ant = ant->getProx();
+            }
+            ant->setProx(a->getProx());
+            delete a;
+        }
+}
+
 GrafoLista* GrafoLista::copiarGrafo() {
     GrafoLista* grafo = new GrafoLista();
     ///Copia os vertices do grafo;
@@ -216,24 +245,4 @@ GrafoLista* GrafoLista::copiarGrafo() {
         v = v->getProx();
     }
     return grafo;
-}
-void GrafoLista::removerAresta(Aresta* a) {
-        Vertice* v = a->getInicio();
-        v->removerAresta(a);
-        if (direcionado != true) {
-            v = a->getFim();
-            v->removerAresta(a);
-        }
-
-        if (raizAresta == a) {
-            raizAresta = a->getProx();
-            delete a;
-        } else {
-            Aresta* ant = raizAresta;
-            while (ant->getProx() != a) {
-                ant = ant->getProx();
-            }
-            ant->setProx(a->getProx());
-            delete a;
-        }
 }
