@@ -15,11 +15,6 @@ Vertice::Vertice(int _id) {
     n = 0;
     tam = 10;
     arestas = new Aresta*[tam];
-    listaAresta = nullptr;
-    cor = Coloracao::SEMCOR;
-    visitado = false;
-    disc = -1;
-    low = -1;
 }
 
 Vertice::~Vertice() {
@@ -78,12 +73,6 @@ int Vertice::totalArestas() {
     return n;
 }
 
-void Vertice::setCorVisita(Coloracao _cor) {
-    cor = _cor;
-}
-Coloracao Vertice::getVisitado() {
-    return cor;
-}
 void Vertice::removerAresta(Aresta* a)
 {
     // Encontrar posição da aresta no vetor

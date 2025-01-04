@@ -5,7 +5,6 @@
 #ifndef VERTICE_H
 #define VERTICE_H
 #include "Aresta.h"
-#include "Coloracao.h"
 
 class Aresta;
 
@@ -23,17 +22,10 @@ public:
     int totalArestas();
 
 
-    void setCorVisita(Coloracao _cor);
-    Coloracao getVisitado();
     void removerAresta(Aresta* a);
     Aresta* getArestaPara(Vertice* v);
 
 private:
-    Aresta *listaAresta;
-    bool visitado;
-    int disc;
-    int low;
-    Coloracao cor;
     int id;
     int peso;
     Vertice* prox;
