@@ -265,7 +265,6 @@ int GrafoLista::nConexo() {
     return componentesConexas;
 }
 
-
 void GrafoLista::auxNConexo(bool *visitados, Vertice *v) {
     visitados[v->getId() - 1] = true;
     for (int i = 0; i < v->totalArestas(); ++i) {
@@ -275,21 +274,4 @@ void GrafoLista::auxNConexo(bool *visitados, Vertice *v) {
             auxNConexo(visitados, adj);
         }
     }
-}
-
-void GrafoLista::removerAresta(Aresta* a) {
-    Vertice* v = a->getInicio();
-    v->removerAresta(a);
-    if (direcionado != true) {
-        v = a->getFim();
-        v->removerAresta(a);
-    }
-
-    Aresta* ant = raizAresta;
-    while (ant->getProx() != a) {
-        ant = ant->getProx();
-    }
-    ant->setProx(a->getProx());
-
-    delete a;
 }

@@ -8,6 +8,8 @@ int main() {
     GrafoLista g;
     g.carregaGrafo();
 
+    cout << endl << endl;
+
     if (g.arestaPonderada())
         cout << "Arestas ponderadas." << endl;
     else
@@ -24,13 +26,17 @@ int main() {
         cout << "Eh conexo." << endl;
     else
         cout << "Nao eh conexo." << endl;
+
+    cout << "Eh " << g.nConexo() << "-conexo." << endl;
+
     if (g.ehArvore())
         cout << "Eh arvore." << endl;
     else
         cout << "Nao eh arvore." << endl;
 
 
-    cout<<endl<<endl;
+    cout << endl << endl;
+
     if (g.verticePonderado())
         cout<< "Vertice Ponderada." << endl;
     else
@@ -48,7 +54,7 @@ int main() {
     else
         cout << "Nao eh Bipartido." << endl;
 
-    cout << endl << "FUNCAO ARTICULACAO" << endl;
+    /*cout << endl << "FUNCAO ARTICULACAO" << endl;
     if (g.possuiArticulacao())
         cout << "Possui articulacao." << endl;
     else
@@ -58,8 +64,7 @@ int main() {
     if (g.possuiPonte())
         cout<< "Possui Ponte." << endl;
     else
-        cout << "Nao possui Ponte." << endl;
+        cout << "Nao possui Ponte." << endl;*/
 
     return 0;
 }
-
