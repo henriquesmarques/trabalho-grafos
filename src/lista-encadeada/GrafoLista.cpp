@@ -89,13 +89,6 @@ void GrafoLista::carrega_grafo() {
     arquivo.close();
 }
 
-void GrafoLista::inserirVerticePonteiro(Vertice *v) {
-    if (raizVertice != nullptr) {
-        v->setProx(raizVertice);
-    }
-    raizVertice = v;
-}
-
 void GrafoLista::inserirVertice(int id, int peso) {
     Vertice* v = new Vertice(id);
     v->setPeso(peso);
@@ -258,4 +251,26 @@ bool GrafoLista::eh_arvore() {
 }
 
 void GrafoLista::novo_grafo() {
+    /// Bipartido:
+    /// 1. separar em dois grupos
+    /// 2. sortear um de cada gupo para criar uma aresta
+
+
+    /// Sortea uma aresta
+    /// Insere
+    /// Descumpriu algiuma imposição?
+    /// Se não, então continua
+    /// Se sim, remove e sorteia novamente
+
+
+    /// Grafo conexo
+    /// adicionar arestas até o número de componentes ser igual a 1
+
+    /// Aresta ponte
+    /// criar dois grupos
+    /// criar uma aresta que liga eles
 }
+
+/// Bipartido
+///
+///

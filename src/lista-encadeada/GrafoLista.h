@@ -42,16 +42,11 @@ private:
     void auxNConexo(bool *visitados, Vertice *v);
 
     bool auxEhBipartido(int i, int c, int *cor);
-    bool auxPonte(Vertice *v, int comp);
-    //bool auxArticulacao(Vertice *v, int comp);
     GrafoLista* copiarGrafo();
     Aresta* buscaAresta(int id, int peso);
     Vertice* buscaVertice(int id);
-
     Aresta** removerVertice(Vertice* v);
     void removerAresta(Aresta* aresta);
-    void retiraVertice(int id);
-    void inserirVerticePonteiro(Vertice* v);
 };
 
 #endif //GRAFO_H

@@ -37,7 +37,7 @@ int main() {
     else
         cout << "Nao eh vertice ponderada." << endl;
 
-    cout<<"Grau do grafo: " << g.getGrau()<<endl;
+    cout<<"Grau do grafo: " << g.getGrau()<<endl;*/
 
     if (g.ehCompleto())
         cout << "Eh completo." << endl;
@@ -49,16 +49,15 @@ int main() {
     else
         cout << "Nao eh Bipartido." << endl;
 
-    if (g.possuiArticulacao())
+    /*if (g.possuiArticulacao())
         cout << "Possui articulacao." << endl;
     else
-        cout << "Nao possui articulacao." << endl;*/
+        cout << "Nao possui articulacao." << endl;
 
-    cout << endl << "FUNCAO PONTE" << endl;
     if (g.possuiPonte())
         cout<< "Possui Ponte." << endl;
     else
-        cout << "Nao possui Ponte." << endl;
+        cout << "Nao possui Ponte." << endl;*/
 
     return 0;
 }
