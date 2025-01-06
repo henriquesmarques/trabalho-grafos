@@ -215,8 +215,9 @@ bool GrafoLista::auxEhCiclico(Vertice* v, bool* visitados, Vertice* pai) {
 }
 
 bool GrafoLista::ehArvore() {
-    if (ehConexo() && !ehCiclico()) {
-        return true;
+    if (ehConexo()) {
+        if (!ehCiclico())
+            return true;
     }
     return false;
 }
