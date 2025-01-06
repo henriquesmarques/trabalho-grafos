@@ -20,11 +20,9 @@ public:
     void inserirAresta(Aresta* a);
     Aresta* getAresta(int i);
     int totalArestas();
-
-
     void removerAresta(Aresta* a);
     Aresta* getArestaPara(Vertice* v);
-
+    Aresta** getVetorArestas() {return arestas;}
 private:
     int id;
     int peso;

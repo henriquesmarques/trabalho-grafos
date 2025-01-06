@@ -80,11 +80,10 @@ void Vertice::removerAresta(Aresta* a)
     }
     // Verificar se a aresta foi encontrada
     if (i == n) {
-        cout << "Erro: Aresta não encontrada." << endl;
+        cout << "Erro: Aresta nao encontrada." << endl;
         exit(1);
-    } else {
-        cout << "Aresta encontrada na posição " << i << " do vetor." << endl;
     }
+
     // Reorganizando vetor
     for (int j = i; j < n-1; j++) {
         arestas[j] = arestas[j+1];

@@ -89,6 +89,13 @@ void GrafoLista::carrega_grafo() {
     arquivo.close();
 }
 
+void GrafoLista::inserirVerticePonteiro(Vertice *v) {
+    if (raizVertice != nullptr) {
+        v->setProx(raizVertice);
+    }
+    raizVertice = v;
+}
+
 void GrafoLista::inserirVertice(int id, int peso) {
     Vertice* v = new Vertice(id);
     v->setPeso(peso);
@@ -110,9 +117,7 @@ void GrafoLista::inserirAresta(Vertice *inicio, Vertice *fim, int peso) {
 
         // Adicionando ponteiro da aresta no vértice
         inicio->inserirAresta(a);
-        //if (!ehDirecionado()) {
-            fim->inserirAresta(a);
-        //}
+        fim->inserirAresta(a);
 
         // Adicionando aresta na lista
         if (raizAresta != nullptr) {

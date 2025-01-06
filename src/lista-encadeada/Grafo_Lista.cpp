@@ -16,6 +16,7 @@ bool GrafoLista::verticePonderado() {
     }
     return false;
 }
+
 int GrafoLista::getGrau() {
     Vertice *v = raizVertice;
     int grauGrafo =0;
@@ -29,6 +30,7 @@ int GrafoLista::getGrau() {
     }
     return grauGrafo;
 }
+
 bool GrafoLista::ehCompleto() {
     ///verifica se todos os nos possuem mesmo grau
     int grau = 0, grauGrafo = 0, aux = 0;
@@ -49,6 +51,7 @@ bool GrafoLista::ehCompleto() {
         return true;
     return false;
 }
+
 bool GrafoLista::ehBipartido() {
     /// eh bipartido se seus vértices puderem ser divididos em dois conjuntos disjuntos,
     /// de forma que não haja arestas entre vértices do mesmo conjunto
@@ -70,6 +73,7 @@ bool GrafoLista::ehBipartido() {
     delete [] cor;
     return true;
 }
+
 bool GrafoLista::auxEhBipartido(int i, int c, int *cor) {
     cor[i]=c; ///colore o vertice U com a cor c
     for ( Vertice* vizinho = buscaVertice(i); vizinho!= nullptr; vizinho=vizinho->getProx()) {
@@ -87,65 +91,108 @@ bool GrafoLista::auxEhBipartido(int i, int c, int *cor) {
 
 bool GrafoLista::possuiArticulacao() {
     ///definição: se retira um vertice, aumenta o numero de componentes conexas;
-    ///um grafo completo se retirado um vertice não aumenta o numero de componentes conexas
-    if (ehCompleto())
+    if (ehCompleto()) ///um grafo completo se retirado um vertice não aumenta o numero de componentes conexas
         return false;
     ///calcula o numero de componentes conexas;
     int componentesConexas = n_conexo();
-    Vertice* v = raizVertice;
     ///laco para realizar a remoção de um no por vez no grafo
-    for (int i=0; i<get_ordem(); i++) {
-        GrafoLista* grafo = copiarGrafo(); ///a cada iteração faz a copia grafo
-        if (grafo->auxArticulacao(v, componentesConexas))///chama a funcao auxiliar para o vertice do grafo copiado
-        {
-            delete grafo;
+    GrafoLista* grafo = copiarGrafo();
+    Vertice* v = raizVertice;
+    while (v != nullptr) {
+        ///retira um vertice
+        int tam = v->totalArestas();
+        Aresta** arestas = grafo->removerVertice(grafo->buscaVertice(v->getId()));
+
+        ///contabiliza o numero de componentes
+        int comp2 = grafo->n_conexo();
+        if (comp2 > componentesConexas)
             return true;
-        }
-        delete grafo;
-        v = v->getProx(); ///atualização para o proximo vertice
+
+        ///reinsere o vertice no grafo
+        grafo->inserirVerticePonteiro(v);
+        for (int i = 0; i < tam; i++)
+            grafo->inserirAresta(arestas[i]->getInicio(), arestas[i]->getFim(), arestas[i]->getPeso());
+
+        delete [] arestas;
+        v = v->getProx();
     }
+    delete grafo;
     return false;
 }
-bool GrafoLista::auxArticulacao(Vertice *v, int comp) {
-    ///retira um vertice e verifica o numero de componentes conexas
-    retiraVertice(v->getId()); ///chama a função que remove o vertice
-    int comp2 = n_conexo(); ///contabiliza o numero de componentes apos a remocao
-    return comp2 > comp;
+
+Aresta** GrafoLista::removerVertice(Vertice* v) {
+    /// 1. Percorrer vetor de arestas de X
+    //Aresta** arestasRemovidas = v->getVetorArestas();
+    for (int i = v->totalArestas()-1; i >= 0; i--) {
+        /// 2. Remover essa aresta do vetor de arestas do vértice que liga X
+        removerAresta(v->getAresta(i));
+    }
+
+    /// 3. Remover vértice da lista de vértices
+    Vertice* p = raizVertice;
+    while (p->getProx() != v) {
+        p = p->getProx();
+    }
+    p->setProx(v->getProx());
+
+    return nullptr;
+}
+
+void GrafoLista::removerAresta(Aresta* a) {
+    /// Remoção da ligação entre os vértices
+    Vertice* v = a->getInicio();
+    v->removerAresta(a);
+    v = a->getFim();
+    v->removerAresta(a);
+
+    /// Remoção da aresta da lista de arestas
+    if (raizAresta == a) {
+        raizAresta = a->getProx();
+        //delete a;
+    } else {
+        Aresta* ant = raizAresta;
+        while (ant->getProx() != a) {
+            ant = ant->getProx();
+        }
+        ant->setProx(a->getProx());
+        //delete a;
+    }
 }
 
 void GrafoLista::retiraVertice(int id){
-        Vertice* p = raizVertice;
-        Vertice* aux = nullptr;
-        // Remover arestas que têm 'id' como destino
-        while (p != nullptr) {
-            for (int i =0; i<p->totalArestas(); i++) {
-                Aresta *a = p->getAresta(i);
-                while (a!= nullptr) {
-                    if (a->getFim()->getId() == id) {
-                        p->removerAresta(a);
-                        i--;
-                    }
+    Vertice* p = raizVertice;
+    Vertice* aux = nullptr;
+    // Remover arestas que têm 'id' como destino
+    while (p != nullptr) {
+        for (int i = 0; i < p->totalArestas(); i++) {
+            Aresta *a = p->getAresta(i);
+            while (a != nullptr) {
+                if (a->getFim()->getId() == id) {
+                    p->removerAresta(a);
+                    i--;
                 }
             }
-            p = p->getProx();
-        } // Resetar o ponteiro 'p' para procurar o vértice a ser removido
-        p = raizVertice;
-        while (p != nullptr && p->getId() != id) {
-            aux = p;
-            p = p->getProx();
-        } // Se o vértice foi encontrado
-        if (p != nullptr && p->getId() == id) {
-            if (aux == nullptr) {
-                // Caso o vértice a ser removido seja o primeiro vértice (raizVertice)
-                raizVertice = p->getProx(); }
-            else{ // Caso o vértice a ser removido não seja o primeiro
-                aux->setProx(p->getProx()); }
-            delete p;
-            cout << "No " << id << " removido com sucesso.\n"; }
-        else {
-            cout << "No " << id << " não encontrado.\n";
         }
+        p = p->getProx();
+    } // Resetar o ponteiro 'p' para procurar o vértice a ser removido
+    p = raizVertice;
+    while (p != nullptr && p->getId() != id) {
+        aux = p;
+        p = p->getProx();
+    } // Se o vértice foi encontrado
+    if (p != nullptr && p->getId() == id) {
+        if (aux == nullptr) {
+            // Caso o vértice a ser removido seja o primeiro vértice (raizVertice)
+            raizVertice = p->getProx(); }
+        else{ // Caso o vértice a ser removido não seja o primeiro
+            aux->setProx(p->getProx()); }
+        delete p;
+        cout << "No " << id << " removido com sucesso.\n"; }
+    else {
+        cout << "No " << id << " não encontrado.\n";
+    }
 }
+
 Aresta* GrafoLista::buscaAresta(int vert1, int vert2){
     Vertice* p = buscaVertice(vert1);
     Aresta* aux = p->getAresta(vert2);
@@ -158,6 +205,7 @@ Aresta* GrafoLista::buscaAresta(int vert1, int vert2){
     }
     return aux;
 }
+
 Vertice* GrafoLista::buscaVertice(int id){
     Vertice* p = raizVertice;
     while(p != nullptr){
@@ -167,8 +215,6 @@ Vertice* GrafoLista::buscaVertice(int id){
     }
     return p;
 }
-
-
 
 bool GrafoLista::possuiPonte() {
     ///definição: se retira uma aresta, aumenta o numero de componentes conexas;
@@ -189,6 +235,7 @@ bool GrafoLista::possuiPonte() {
     }
     return false;
 }
+
 bool GrafoLista::auxPonte(Vertice *v, int comp){
     for (int i=0; i<v->totalArestas(); i++) {
         Aresta* a = v->getAresta(i);
@@ -202,26 +249,6 @@ bool GrafoLista::auxPonte(Vertice *v, int comp){
     }
     return false;
 }
-void GrafoLista::removerAresta(Aresta* a) {
-        Vertice* v = a->getInicio();
-        v->removerAresta(a);
-        if (direcionado != true) {
-            v = a->getFim();
-            v->removerAresta(a);
-        }
-
-        if (raizAresta == a) {
-            raizAresta = a->getProx();
-            delete a;
-        } else {
-            Aresta* ant = raizAresta;
-            while (ant->getProx() != a) {
-                ant = ant->getProx();
-            }
-            ant->setProx(a->getProx());
-            delete a;
-        }
-}
 
 GrafoLista* GrafoLista::copiarGrafo() {
     GrafoLista* grafo = new GrafoLista();
@@ -234,14 +261,10 @@ GrafoLista* GrafoLista::copiarGrafo() {
     imprimirVertices();
     ///Copia as arestas do grafo;
     Aresta* a = raizAresta;
-    v = raizVertice; ///atualiza v para o inicio
-    while (v!= nullptr) {
-        while (a != nullptr) {
-            ///insere cada aresta
-            grafo->inserirAresta(a->getInicio(), a->getFim(), a->getPeso());
-            a = a->getProx();
-        }
-        v = v->getProx();
+
+    while (a != nullptr) {///insere cada aresta
+        grafo->inserirAresta(grafo->buscaVertice(a->getInicio()->getId()), grafo->buscaVertice(a->getFim()->getId()), a->getPeso());
+        a = a->getProx();
     }
     return grafo;
 }

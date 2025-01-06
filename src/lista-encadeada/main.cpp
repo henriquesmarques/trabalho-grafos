@@ -10,7 +10,7 @@ int main() {
 
     cout << endl << endl;
 
-    if (g.aresta_ponderada())
+    /*if (g.aresta_ponderada())
         cout << "Arestas ponderadas." << endl;
     else
         cout << "Arestas nao ponderadas." << endl;
@@ -30,7 +30,7 @@ int main() {
         cout << "Nao eh arvore." << endl;
 
 
-    /*cout << endl << endl;
+    cout << endl << endl;
 
     if (g.verticePonderado())
         cout<< "Vertice Ponderada." << endl;
@@ -49,17 +49,16 @@ int main() {
     else
         cout << "Nao eh Bipartido." << endl;
 
-    cout << endl << "FUNCAO ARTICULACAO" << endl;
     if (g.possuiArticulacao())
         cout << "Possui articulacao." << endl;
     else
-        cout << "Nao possui articulacao." << endl;
+        cout << "Nao possui articulacao." << endl;*/
 
     cout << endl << "FUNCAO PONTE" << endl;
     if (g.possuiPonte())
         cout<< "Possui Ponte." << endl;
     else
-        cout << "Nao possui Ponte." << endl;*/
+        cout << "Nao possui Ponte." << endl;
 
     return 0;
 }
