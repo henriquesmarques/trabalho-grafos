@@ -19,7 +19,6 @@ public:
     bool ehDirecionado(); /// Função que retorna se o grafo é direcionado ou não
     bool ehArvore(); /// Função que diz se o grafo é uma árvore
     int nConexo(); /// Função que indica a quantidade de componentes conexas
-    bool ehConexo(); // !!!Funciona apenas para grafos direcionados!!!
 
     bool ehCompleto();  /// Função que diz se o grafo é completo ou não
     int getGrau();  /// Função que retorna o grau do grafo
@@ -38,6 +37,7 @@ private:
     void inserirAresta(Vertice* inicio, Vertice* fim, int peso);
     void imprimirVertices();
     void imprimirArestas();
+    bool ehConexo();
     bool ehCiclico();
     bool auxEhCiclico(Vertice* v, bool* visitados, Vertice* pai);
     void auxNConexo(bool *visitados, Vertice *v);
