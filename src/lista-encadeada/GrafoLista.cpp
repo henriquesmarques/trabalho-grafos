@@ -28,7 +28,7 @@ GrafoLista::~GrafoLista() {
     }
 }
 
-void GrafoLista::carregaGrafo() {
+void GrafoLista::carrega_grafo() {
     ifstream arquivo;
     arquivo.open("C:/Users/henri/CLionProjects/trabalho-grafos/Grafo.txt", ios::in);
 
@@ -143,7 +143,7 @@ void GrafoLista::imprimirArestas() {
     }
 }
 
-bool GrafoLista::arestaPonderada() {
+bool GrafoLista::aresta_ponderada() {
     Aresta *a = raizAresta;
     while (a != nullptr) {
         if (a->getPeso() != 1) {
@@ -154,7 +154,7 @@ bool GrafoLista::arestaPonderada() {
     return false;
 }
 
-int GrafoLista::getOrdem() {
+int GrafoLista::get_ordem() {
     Vertice* v = raizVertice;
     int ordem = 0;
     while (v != nullptr) {
@@ -164,18 +164,48 @@ int GrafoLista::getOrdem() {
     return ordem;
 }
 
-bool GrafoLista::ehDirecionado() {
+bool GrafoLista::eh_direcionado() {
     return direcionado;
 }
 
-bool GrafoLista::ehConexo() {
-    if (nConexo() == 1)
-        return true;
-    return false;
+int GrafoLista::n_conexo() {
+    int numVertices = get_ordem();
+    if (numVertices == 0) return 0;
+
+    bool *visitados = new bool[numVertices];
+    for (int i = 0; i < numVertices; ++i) {
+        visitados[i] = false;
+    }
+
+    int componentesConexas = 0;
+    for (Vertice* v = raizVertice; v != nullptr; v = v->getProx()) {
+        if (!visitados[v->getId() - 1]) {
+            auxNConexo(visitados, v);
+            componentesConexas++;
+        }
+    }
+
+    delete[] visitados;
+    return componentesConexas;
+}
+
+void GrafoLista::auxNConexo(bool *visitados, Vertice *v) {
+    visitados[v->getId() - 1] = true;
+    for (int i = 0; i < v->totalArestas(); ++i) {
+        Aresta* a = v->getAresta(i);
+        Vertice* adj = a->getFim();
+        if (!visitados[adj->getId() - 1]) {
+            auxNConexo(visitados, adj);
+        }
+        adj = a->getInicio();
+        if (!visitados[adj->getId() - 1]) {
+            auxNConexo(visitados, adj);
+        }
+    }
 }
 
 bool GrafoLista::ehCiclico() {
-    int numVertices = getOrdem();
+    int numVertices = get_ordem();
     if (numVertices == 0) return false;
 
     bool* visitados = new bool[numVertices];
@@ -214,49 +244,13 @@ bool GrafoLista::auxEhCiclico(Vertice* v, bool* visitados, Vertice* pai) {
     return false;
 }
 
-bool GrafoLista::ehArvore() {
-    if (ehConexo()) {
+bool GrafoLista::eh_arvore() {
+    if (n_conexo() == 1) {
         if (!ehCiclico())
             return true;
     }
     return false;
 }
 
-int GrafoLista::nConexo() {
-    int numVertices = getOrdem();
-    if (numVertices == 0) return 0;
-
-    bool *visitados = new bool[numVertices];
-    for (int i = 0; i < numVertices; ++i) {
-        visitados[i] = false;
-    }
-
-    int componentesConexas = 0;
-    for (Vertice* v = raizVertice; v != nullptr; v = v->getProx()) {
-        if (!visitados[v->getId() - 1]) {
-            //cout << "Visitados: ";
-            auxNConexo(visitados, v);
-            componentesConexas++;
-            //cout << endl;
-        }
-    }
-
-    delete[] visitados;
-    return componentesConexas;
-}
-
-void GrafoLista::auxNConexo(bool *visitados, Vertice *v) {
-    visitados[v->getId() - 1] = true;
-    //cout << v->getId() << " ";
-    for (int i = 0; i < v->totalArestas(); ++i) {
-        Aresta* a = v->getAresta(i);
-        Vertice* adj = a->getFim();
-        if (!visitados[adj->getId() - 1]) {
-            auxNConexo(visitados, adj);
-        }
-        adj = a->getInicio();
-        if (!visitados[adj->getId() - 1]) {
-            auxNConexo(visitados, adj);
-        }
-    }
+void GrafoLista::novo_grafo() {
 }

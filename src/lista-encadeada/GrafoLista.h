@@ -13,12 +13,13 @@ class GrafoLista {
 public:
     GrafoLista();
     ~GrafoLista();
-    void carregaGrafo(); /// Função que lê um arquivo txt com um grafo e carrega ele
-    bool arestaPonderada(); /// Função que informa se as arestas do grafo tem peso
-    int getOrdem(); /// Função que retorna a ordem do grafo
-    bool ehDirecionado(); /// Função que retorna se o grafo é direcionado ou não
-    bool ehArvore(); /// Função que diz se o grafo é uma árvore
-    int nConexo(); /// Função que indica a quantidade de componentes conexas
+    void carrega_grafo(); /// Função que lê um arquivo txt com um grafo e carrega ele
+    void novo_grafo(); /// Função que lê um arquivo txt de configuração e gera um grafo aleatório
+    bool aresta_ponderada(); /// Função que informa se as arestas do grafo tem peso
+    int get_ordem(); /// Função que retorna a ordem do grafo
+    bool eh_direcionado(); /// Função que retorna se o grafo é direcionado ou não
+    bool eh_arvore(); /// Função que diz se o grafo é uma árvore
+    int n_conexo(); /// Função que indica a quantidade de componentes conexas
 
     bool ehCompleto();  /// Função que diz se o grafo é completo ou não
     int getGrau();  /// Função que retorna o grau do grafo
@@ -26,7 +27,6 @@ public:
     bool possuiArticulacao();   /// Função que diz se possui vertice de articulação
     bool possuiPonte(); /// Função que diz se possui aresta ponte
     bool verticePonderado();    /// Função que diz se o no possui peso
-    void novo_grafo(); /// Função que lê um arquivo txt de configuração e gera um grafo aleatório
 
 private:
     Vertice* raizVertice;
@@ -37,7 +37,6 @@ private:
     void inserirAresta(Vertice* inicio, Vertice* fim, int peso);
     void imprimirVertices();
     void imprimirArestas();
-    bool ehConexo();
     bool ehCiclico();
     bool auxEhCiclico(Vertice* v, bool* visitados, Vertice* pai);
     void auxNConexo(bool *visitados, Vertice *v);

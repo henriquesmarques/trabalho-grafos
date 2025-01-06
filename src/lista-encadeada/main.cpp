@@ -6,25 +6,25 @@ using namespace std;
 int main() {
 
     GrafoLista g;
-    g.carregaGrafo();
+    g.carrega_grafo();
 
     cout << endl << endl;
 
-    if (g.arestaPonderada())
+    if (g.aresta_ponderada())
         cout << "Arestas ponderadas." << endl;
     else
         cout << "Arestas nao ponderadas." << endl;
 
-    cout << "Ordem do grafo: " << g.getOrdem() << endl;
+    cout << "Ordem do grafo: " << g.get_ordem() << endl;
 
-    if (g.ehDirecionado())
+    if (g.eh_direcionado())
         cout << "Eh direcionado." << endl;
     else
         cout << "Nao eh direcionado." << endl;
 
-    cout << "Eh " << g.nConexo() << "-conexo." << endl;
+    cout << "Eh " << g.n_conexo() << "-conexo." << endl;
 
-    if (g.ehArvore())
+    if (g.eh_arvore())
         cout << "Eh arvore." << endl;
     else
         cout << "Nao eh arvore." << endl;

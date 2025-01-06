@@ -45,7 +45,7 @@ bool GrafoLista::ehCompleto() {
         v = v->getProx();
     }
 
-    if (grauGrafo == getOrdem()-1)
+    if (grauGrafo == get_ordem()-1)
         return true;
     return false;
 }
@@ -54,7 +54,7 @@ bool GrafoLista::ehBipartido() {
     /// de forma que não haja arestas entre vértices do mesmo conjunto
     if (ehCompleto())
         return false;
-    int n = getOrdem();
+    int n = get_ordem();
     int *cor = new int[n];
     ///Inicializa todos como sem cor = -1
     for (int i=0;i<n;i++)
@@ -91,10 +91,10 @@ bool GrafoLista::possuiArticulacao() {
     if (ehCompleto())
         return false;
     ///calcula o numero de componentes conexas;
-    int componentesConexas = nConexo();
+    int componentesConexas = n_conexo();
     Vertice* v = raizVertice;
     ///laco para realizar a remoção de um no por vez no grafo
-    for (int i=0; i<getOrdem(); i++) {
+    for (int i=0; i<get_ordem(); i++) {
         GrafoLista* grafo = copiarGrafo(); ///a cada iteração faz a copia grafo
         if (grafo->auxArticulacao(v, componentesConexas))///chama a funcao auxiliar para o vertice do grafo copiado
         {
@@ -109,7 +109,7 @@ bool GrafoLista::possuiArticulacao() {
 bool GrafoLista::auxArticulacao(Vertice *v, int comp) {
     ///retira um vertice e verifica o numero de componentes conexas
     retiraVertice(v->getId()); ///chama a função que remove o vertice
-    int comp2 = nConexo(); ///contabiliza o numero de componentes apos a remocao
+    int comp2 = n_conexo(); ///contabiliza o numero de componentes apos a remocao
     return comp2 > comp;
 }
 
@@ -176,7 +176,7 @@ bool GrafoLista::possuiPonte() {
     if (ehCompleto())
         return false;
     ///calcula o numero de componentes conexas;
-    int componentesConexas = nConexo();
+    int componentesConexas = n_conexo();
     ///laco para realizar a remoção de um no por vez no grafo
     for (Vertice* v = raizVertice; v!= nullptr; v = v->getProx()) {
         GrafoLista* grafo = copiarGrafo(); ///a cada iteração faz a copia grafo
@@ -196,7 +196,7 @@ bool GrafoLista::auxPonte(Vertice *v, int comp){
         ///remove a aresta
         v->removerAresta(a);
         destino->removerAresta(destino->getArestaPara(v));
-        int comp2 = nConexo();
+        int comp2 = n_conexo();
         if (comp2 > comp)
             return true;
     }
