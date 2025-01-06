@@ -1,7 +1,6 @@
 #ifndef GRAFO_H
 #define GRAFO_H
 
-#include "Vertice.h"
 #include "Aresta.h"
 
 // Os grafos não devem aceitar arestas múltiplas ou laços
@@ -34,11 +33,11 @@ private:
     Vertice* raizVertice;
     Aresta* raizAresta;
     bool direcionado;
+
     void inserirVertice(int id, int peso);
     void inserirAresta(Vertice* inicio, Vertice* fim, int peso);
     void imprimirVertices();
     void imprimirArestas();
-    void auxEhConexo(bool *visitados, Vertice *v);
     bool ehCiclico();
     bool auxEhCiclico(Vertice* v, bool* visitados, Vertice* pai);
     void auxNConexo(bool *visitados, Vertice *v);

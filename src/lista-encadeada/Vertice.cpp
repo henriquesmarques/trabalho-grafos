@@ -1,8 +1,4 @@
-//
-// Created by gomes on 25/12/2024.
-//
 #include <iostream>
-
 #include "Vertice.h"
 
 using namespace std;

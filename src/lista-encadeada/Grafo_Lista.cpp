@@ -1,10 +1,9 @@
 #include "GrafoLista.h"
+#include "Vertice.h"
 #include <iostream>
 #include <fstream>
-#include <cmath>
 
 using namespace std;
-
 
 bool GrafoLista::verticePonderado() {
     ///verifica se o vertice possui peso

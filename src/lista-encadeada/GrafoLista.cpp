@@ -1,4 +1,5 @@
 #include "GrafoLista.h"
+#include "Vertice.h"
 #include <iostream>
 #include <fstream>
 
@@ -8,6 +9,9 @@ GrafoLista::GrafoLista() {
     raizVertice = nullptr;
     raizAresta = nullptr;
     direcionado = false;
+    // ordem = 0;
+    // vertice_ponderado = false;
+    // aresta_ponderada = false;
 }
 
 GrafoLista::~GrafoLista() {
@@ -106,9 +110,9 @@ void GrafoLista::inserirAresta(Vertice *inicio, Vertice *fim, int peso) {
 
         // Adicionando ponteiro da aresta no vértice
         inicio->inserirAresta(a);
-        if (!ehDirecionado()) {
+        //if (!ehDirecionado()) {
             fim->inserirAresta(a);
-        }
+        //}
 
         // Adicionando aresta na lista
         if (raizAresta != nullptr) {
@@ -165,36 +169,9 @@ bool GrafoLista::ehDirecionado() {
 }
 
 bool GrafoLista::ehConexo() {
-    int numVertices = getOrdem();
-    if (numVertices == 0) return true;
-
-    bool *visitados = new bool[numVertices];
-    for (int i = 0; i < numVertices; ++i) {
-        visitados[i] = false;
-    }
-
-    auxEhConexo(visitados, raizVertice);
-
-    for (int i = 0; i < numVertices; ++i) {
-        if (!visitados[i]) {
-            delete[] visitados;
-            return false;
-        }
-    }
-
-    delete[] visitados;
-    return true;
-}
-
-void GrafoLista::auxEhConexo(bool *visitados, Vertice *v) {
-    visitados[v->getId() - 1] = true;
-    for (int i = 0; i < v->totalArestas(); ++i) {
-        Aresta* a = v->getAresta(i);
-        Vertice* adj = a->getFim();
-        if (!visitados[adj->getId() - 1]) {
-            auxEhConexo(visitados, adj);
-        }
-    }
+    if (nConexo() == 1)
+        return true;
+    return false;
 }
 
 bool GrafoLista::ehCiclico() {
@@ -256,8 +233,10 @@ int GrafoLista::nConexo() {
     int componentesConexas = 0;
     for (Vertice* v = raizVertice; v != nullptr; v = v->getProx()) {
         if (!visitados[v->getId() - 1]) {
+            //cout << "Visitados: ";
             auxNConexo(visitados, v);
             componentesConexas++;
+            //cout << endl;
         }
     }
 
@@ -267,9 +246,14 @@ int GrafoLista::nConexo() {
 
 void GrafoLista::auxNConexo(bool *visitados, Vertice *v) {
     visitados[v->getId() - 1] = true;
+    //cout << v->getId() << " ";
     for (int i = 0; i < v->totalArestas(); ++i) {
         Aresta* a = v->getAresta(i);
         Vertice* adj = a->getFim();
+        if (!visitados[adj->getId() - 1]) {
+            auxNConexo(visitados, adj);
+        }
+        adj = a->getInicio();
         if (!visitados[adj->getId() - 1]) {
             auxNConexo(visitados, adj);
         }

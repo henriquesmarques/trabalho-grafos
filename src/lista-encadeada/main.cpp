@@ -22,11 +22,6 @@ int main() {
     else
         cout << "Nao eh direcionado." << endl;
 
-    if (g.ehConexo())
-        cout << "Eh conexo." << endl;
-    else
-        cout << "Nao eh conexo." << endl;
-
     cout << "Eh " << g.nConexo() << "-conexo." << endl;
 
     if (g.ehArvore())
@@ -35,7 +30,7 @@ int main() {
         cout << "Nao eh arvore." << endl;
 
 
-    cout << endl << endl;
+    /*cout << endl << endl;
 
     if (g.verticePonderado())
         cout<< "Vertice Ponderada." << endl;
@@ -54,7 +49,7 @@ int main() {
     else
         cout << "Nao eh Bipartido." << endl;
 
-    /*cout << endl << "FUNCAO ARTICULACAO" << endl;
+    cout << endl << "FUNCAO ARTICULACAO" << endl;
     if (g.possuiArticulacao())
         cout << "Possui articulacao." << endl;
     else
