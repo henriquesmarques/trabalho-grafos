@@ -300,8 +300,11 @@ void GrafoLista::novo_grafo() {
 
     this->direcionado = direcionado;
 
-    /*if (verticeArticulacao)
-        ordem--;*/
+    // Vertice de Articulação
+    if (verticeArticulacao) {
+        ordem--;
+        componentesConexas++;
+    }
 
     // Criando vértices
     if (verticesPonderados)
@@ -339,13 +342,10 @@ void GrafoLista::novo_grafo() {
                     }
         }
     } else {
-        if (verticeArticulacao)
-            componentesConexas++;
-
         int compConexo = 0;
         int _grau = 0;
-        bool vertArticulacao = false;
-        while (compConexo != componentesConexas && _grau != grau && vertArticulacao != verticeArticulacao) {
+        //bool vertArticulacao = false;
+        while (compConexo != componentesConexas && _grau != grau /*&& vertArticulacao != verticeArticulacao*/) {
             Aresta *a;
             if (arestasPonderadas)
                 a = inserirArestaAleatoria(ordem, sortearPeso(20));
@@ -353,13 +353,13 @@ void GrafoLista::novo_grafo() {
                 a = inserirArestaAleatoria(ordem, 1);
             compConexo = n_conexo();
             _grau = get_grau();
-            vertArticulacao = possui_articulacao();
+            //vertArticulacao = possui_articulacao();
             if (compConexo < componentesConexas || _grau > grau) {
                 removerAresta(a);
             }
         }
 
-        if (verticeArticulacao) {
+        /*if (verticeArticulacao) {
             ordem++;
             componentesConexas--;
 
@@ -368,18 +368,20 @@ void GrafoLista::novo_grafo() {
             else
                 inserirVertice(ordem, 1);
 
-            while (compConexo != componentesConexas && _grau != grau) {
+            while (compConexo != componentesConexas && _grau != grau && vertArticulacao != verticeArticulacao) {
+                // Inserir aresta com origem Vértice[Ordem] e destino uma das componentes
                 if (arestasPonderadas)
                     inserirAresta(buscaVertice(ordem), buscaVertice(sortearVertice(ordem-1)), sortearPeso(20));
                 else
                     inserirAresta(buscaVertice(ordem), buscaVertice(sortearVertice(ordem-1)), 1);
                 compConexo = n_conexo();
                 _grau = get_grau();
-                if (compConexo < componentesConexas || _grau > grau) {
+                vertArticulacao = possui_articulacao();
+                if (compConexo > componentesConexas || _grau > grau) {
                     removerAresta(raizAresta);
                 }
             }
-        }
+        }*/
     }
 
     imprimirVertices();

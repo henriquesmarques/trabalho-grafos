@@ -21,12 +21,12 @@ public:
     bool eh_arvore(); /// Função que diz se o grafo é uma árvore
     int n_conexo(); /// Função que indica a quantidade de componentes conexas
 
-    bool eh_completo();  /// Função que diz se o grafo é completo ou não
-    int get_grau();  /// Função que retorna o grau do grafo
+    bool eh_completo(); /// Função que diz se o grafo é completo ou não
+    int get_grau(); /// Função que retorna o grau do grafo
     bool eh_bipartido(); /// Função que diz se o grafo é bipartido ou não
-    bool possui_articulacao();   /// Função que diz se possui vertice de articulação
+    bool possui_articulacao(); /// Função que diz se possui vertice de articulação
     bool possui_ponte(); /// Função que diz se possui aresta ponte
-    bool vertice_ponderado();    /// Função que diz se o no possui peso
+    bool vertice_ponderado(); /// Função que diz se o no possui peso
 private:
     Vertice* raizVertice;
     Aresta* raizAresta;
