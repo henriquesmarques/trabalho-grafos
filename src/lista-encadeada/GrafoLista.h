@@ -21,18 +21,16 @@ public:
     bool eh_arvore(); /// Função que diz se o grafo é uma árvore
     int n_conexo(); /// Função que indica a quantidade de componentes conexas
 
-    bool ehCompleto();  /// Função que diz se o grafo é completo ou não
-    int getGrau();  /// Função que retorna o grau do grafo
-    bool ehBipartido(); /// Função que diz se o grafo é bipartido ou não
-    bool possuiArticulacao();   /// Função que diz se possui vertice de articulação
-    bool possuiPonte(); /// Função que diz se possui aresta ponte
-    bool verticePonderado();    /// Função que diz se o no possui peso
-
+    bool eh_completo();  /// Função que diz se o grafo é completo ou não
+    int get_grau();  /// Função que retorna o grau do grafo
+    bool eh_bipartido(); /// Função que diz se o grafo é bipartido ou não
+    bool possui_articulacao();   /// Função que diz se possui vertice de articulação
+    bool possui_ponte(); /// Função que diz se possui aresta ponte
+    bool vertice_ponderado();    /// Função que diz se o no possui peso
 private:
     Vertice* raizVertice;
     Aresta* raizAresta;
     bool direcionado;
-
     void inserirVertice(int id, int peso);
     void inserirAresta(Vertice* inicio, Vertice* fim, int peso);
     void inserirPonteiroAresta(Aresta *a);
@@ -43,8 +41,7 @@ private:
     void auxNConexo(bool *visitados, Vertice *v);
     int sortearVertice(int n);
     int sortearPeso(int n);
-
-    Aresta *inserirArestaAleatoria(int ordem, int peso);
+    Aresta* inserirArestaAleatoria(int ordem, int peso);
 
     bool auxEhBipartido(int i, int c, int *cor);
     GrafoLista* copiarGrafo();

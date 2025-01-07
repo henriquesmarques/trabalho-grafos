@@ -5,7 +5,7 @@
 
 using namespace std;
 
-bool GrafoLista::verticePonderado() {
+bool GrafoLista::vertice_ponderado() {
     ///verifica se o vertice possui peso
     Vertice *v = raizVertice;
     while (v != nullptr) {
@@ -17,7 +17,7 @@ bool GrafoLista::verticePonderado() {
     return false;
 }
 
-int GrafoLista::getGrau() {
+int GrafoLista::get_grau() {
     Vertice *v = raizVertice;
     int grauGrafo =0;
     int grau = 0;
@@ -31,7 +31,7 @@ int GrafoLista::getGrau() {
     return grauGrafo;
 }
 
-bool GrafoLista::ehCompleto() {
+bool GrafoLista::eh_completo() {
     ///verifica se todos os nos possuem mesmo grau
     int grau = 0, grauGrafo = 0, aux = 0;
     Vertice *v = raizVertice;
@@ -55,10 +55,10 @@ bool GrafoLista::ehCompleto() {
     return false;
 }
 
-bool GrafoLista::ehBipartido() {
+bool GrafoLista::eh_bipartido() {
     /// eh bipartido se seus vértices puderem ser divididos em dois conjuntos disjuntos,
     /// de forma que não haja arestas entre vértices do mesmo conjunto
-    if (ehCompleto())
+    if (eh_completo())
         return false;
     int n = get_ordem();
     int *cor = new int[n];
@@ -92,9 +92,9 @@ bool GrafoLista::auxEhBipartido(int i, int c, int *cor) {
     return true;
 }
 
-bool GrafoLista::possuiArticulacao() {
+bool GrafoLista::possui_articulacao() {
     ///definição: se retira um vertice, aumenta o numero de componentes conexas;
-    if (ehCompleto()) ///um grafo completo se retirado um vertice não aumenta o numero de componentes conexas
+    if (eh_completo()) ///um grafo completo se retirado um vertice não aumenta o numero de componentes conexas
         return false;
     ///calcula o numero de componentes conexas;
     int componentesConexas = n_conexo();
@@ -126,10 +126,10 @@ bool GrafoLista::possuiArticulacao() {
     return false;
 }
 
-bool GrafoLista::possuiPonte() {
+bool GrafoLista::possui_ponte() {
     ///definição: se retira uma aresta, aumenta o numero de componentes conexas;
     ///um grafo completo se retirado um vertice não aumenta o numero de componentes conexas
-    if (ehCompleto())
+    if (eh_completo())
         return false;
     ///calcula o numero de componentes conexas;
     int componentesConexas = n_conexo();

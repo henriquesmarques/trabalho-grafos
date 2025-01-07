@@ -344,14 +344,16 @@ void GrafoLista::novo_grafo() {
 
         int compConexo = 0;
         int _grau = 0;
-        while (compConexo != componentesConexas && _grau != grau) {
+        bool vertArticulacao = false;
+        while (compConexo != componentesConexas && _grau != grau && vertArticulacao != verticeArticulacao) {
             Aresta *a;
             if (arestasPonderadas)
                 a = inserirArestaAleatoria(ordem, sortearPeso(20));
             else
                 a = inserirArestaAleatoria(ordem, 1);
             compConexo = n_conexo();
-            _grau = getGrau();
+            _grau = get_grau();
+            vertArticulacao = possui_articulacao();
             if (compConexo < componentesConexas || _grau > grau) {
                 removerAresta(a);
             }
@@ -361,7 +363,7 @@ void GrafoLista::novo_grafo() {
             ordem++;
             componentesConexas--;
 
-            if (verticePonderado())
+            if (vertice_ponderado())
                 inserirVertice(ordem, sortearPeso(20));
             else
                 inserirVertice(ordem, 1);
@@ -372,7 +374,7 @@ void GrafoLista::novo_grafo() {
                 else
                     inserirAresta(buscaVertice(ordem), buscaVertice(sortearVertice(ordem-1)), 1);
                 compConexo = n_conexo();
-                _grau = getGrau();
+                _grau = get_grau();
                 if (compConexo < componentesConexas || _grau > grau) {
                     removerAresta(raizAresta);
                 }
@@ -383,11 +385,11 @@ void GrafoLista::novo_grafo() {
     imprimirVertices();
     imprimirArestas();
 
-    cout << "Grau: " << getGrau() << endl << "Ordem: " << get_ordem() << endl << "Direcionado: " << eh_direcionado() << endl <<
-        "Componentes conexas: " << n_conexo() << endl << "Vertices ponderados: " << verticePonderado() << endl <<
-        "Arestas ponderadas: " << aresta_ponderada() << endl << "Completo: " << ehCompleto() /*<< endl <<
+    cout << "Grau: " << get_grau() << endl << "Ordem: " << get_ordem() << endl << "Direcionado: " << eh_direcionado() << endl <<
+        "Componentes conexas: " << n_conexo() << endl << "Vertices ponderados: " << vertice_ponderado() << endl <<
+        "Arestas ponderadas: " << aresta_ponderada() << endl << "Completo: " << eh_completo() /*<< endl <<
         "Bipartido: " << ehBipartido()*/ << endl << "Arvore: " << eh_arvore() /*<< endl << "Aresta Ponte: " <<
-        possuiPonte()*/ << endl << "Vertice de Articulacao: " << possuiArticulacao() << endl;
+        possuiPonte()*/ << endl << "Vertice de Articulacao: " << possui_articulacao() << endl;
 }
 
 // Grau
