@@ -110,7 +110,7 @@ void GrafoLista::inserirAresta(Vertice *inicio, Vertice *fim, int peso) {
         a->setInicio(inicio);
         a->setFim(fim);
 
-        // Adicionando ponteiro da aresta no vértice
+        // Adiciona aresta nos Vértices
         inicio->inserirAresta(a);
         fim->inserirAresta(a);
 
@@ -344,8 +344,8 @@ void GrafoLista::novo_grafo() {
     } else {
         int compConexo = 0;
         int _grau = 0;
-        //bool vertArticulacao = false;
-        while (compConexo != componentesConexas && _grau != grau /*&& vertArticulacao != verticeArticulacao*/) {
+        bool vertArticulacao = false;
+        while (compConexo != componentesConexas && _grau != grau && vertArticulacao != verticeArticulacao) {
             Aresta *a;
             if (arestasPonderadas)
                 a = inserirArestaAleatoria(ordem, sortearPeso(20));
@@ -353,13 +353,13 @@ void GrafoLista::novo_grafo() {
                 a = inserirArestaAleatoria(ordem, 1);
             compConexo = n_conexo();
             _grau = get_grau();
-            //vertArticulacao = possui_articulacao();
+            vertArticulacao = possui_articulacao();
             if (compConexo < componentesConexas || _grau > grau) {
                 removerAresta(a);
             }
         }
 
-        /*if (verticeArticulacao) {
+        if (verticeArticulacao) {
             ordem++;
             componentesConexas--;
 
@@ -381,7 +381,7 @@ void GrafoLista::novo_grafo() {
                     removerAresta(raizAresta);
                 }
             }
-        }*/
+        }
     }
 
     imprimirVertices();

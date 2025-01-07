@@ -46,12 +46,8 @@ bool GrafoLista::eh_completo() {
         }
         v = v->getProx();
     }
-    if (!eh_direcionado()) {
-        if (grauGrafo == get_ordem()-1)
-            return true;
-    } else if (grauGrafo == 2*get_ordem()-2) {
+    if (grauGrafo == get_ordem()-1)
         return true;
-    }
     return false;
 }
 
@@ -103,23 +99,20 @@ bool GrafoLista::possui_articulacao() {
     for (Vertice* v = raizVertice; v != nullptr; v = v->getProx()) {
         int tam = v->totalArestas();
         Aresta** arestas = v->copiarVetorArestas();
-
         ///retira um vertice
         grafo->removerVertice(grafo->buscaVertice(v->getId()));
-
         ///verifica se o numero de componentes aumentou
-        if (grafo->n_conexo() > componentesConexas) {
+        int componentes = grafo->n_conexo();
+        if (componentes > componentesConexas) {
             delete grafo;
             delete [] arestas;
             return true;
         }
-
         ///reinsere o vertice no grafo
         grafo->inserirVertice(v->getId(), v->getPeso());
+        ///reinsere as arestas
         for (int i = 0; i < tam; i++)
-            grafo->inserirAresta(arestas[i]->getInicio(), arestas[i]->getFim(), arestas[i]->getPeso());
-
-        ///proximo vertice
+            grafo->inserirAresta(grafo->buscaVertice(arestas[i]->getInicio()->getId()), grafo->buscaVertice(arestas[i]->getFim()->getId()), arestas[i]->getPeso());
         delete [] arestas;
     }
     delete grafo;

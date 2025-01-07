@@ -27,12 +27,20 @@ public:
     bool possui_articulacao(); /// Função que diz se possui vertice de articulação
     bool possui_ponte(); /// Função que diz se possui aresta ponte
     bool vertice_ponderado(); /// Função que diz se o no possui peso
+
+    void inserirVertice(int id, int peso);
+    void inserirAresta(Vertice* inicio, Vertice* fim, int peso);
+    Aresta* buscaAresta(int id, int peso);
+    Vertice* buscaVertice(int id);
+    GrafoLista* copiarGrafo();
+
+    void removerVertice(Vertice* v); // Remove um vértice e suas arestas adjacentes
+    void removerAresta(Aresta* aresta); // Remove uma aresta
 private:
     Vertice* raizVertice;
     Aresta* raizAresta;
     bool direcionado;
-    void inserirVertice(int id, int peso);
-    void inserirAresta(Vertice* inicio, Vertice* fim, int peso);
+
     void inserirPonteiroAresta(Aresta *a);
     void imprimirVertices();
     void imprimirArestas();
@@ -44,11 +52,7 @@ private:
     Aresta* inserirArestaAleatoria(int ordem, int peso);
 
     bool auxEhBipartido(int i, int c, int *cor);
-    GrafoLista* copiarGrafo();
-    Aresta* buscaAresta(int id, int peso);
-    Vertice* buscaVertice(int id);
-    void removerVertice(Vertice* v);
-    void removerAresta(Aresta* aresta);
+
 };
 
 #endif //GRAFO_H
