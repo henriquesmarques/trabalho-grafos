@@ -6,7 +6,8 @@ using namespace std;
 int main() {
 
     GrafoLista g;
-    g.carrega_grafo();
+    //g.carrega_grafo();
+    g.novo_grafo();
 
     cout << endl << endl;
 
@@ -39,7 +40,7 @@ int main() {
 
     cout<<"Grau do grafo: " << g.getGrau()<<endl;*/
 
-    if (g.ehCompleto())
+    /*if (g.ehCompleto())
         cout << "Eh completo." << endl;
     else
         cout << "Nao eh completo." << endl;
@@ -47,7 +48,7 @@ int main() {
     if (g.ehBipartido())
         cout << "Eh Bipartido." << endl;
     else
-        cout << "Nao eh Bipartido." << endl;
+        cout << "Nao eh Bipartido." << endl;*/
 
     /*if (g.possuiArticulacao())
         cout << "Possui articulacao." << endl;

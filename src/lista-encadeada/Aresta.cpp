@@ -10,6 +10,13 @@ Aresta::Aresta() {
     prox = nullptr;
 }
 
+Aresta::Aresta(Vertice *_inicio, Vertice *_fim, int _peso) {
+    peso = _peso;
+    fim = _fim;
+    inicio = _inicio;
+    prox = nullptr;
+}
+
 Aresta::~Aresta() {
 }
 

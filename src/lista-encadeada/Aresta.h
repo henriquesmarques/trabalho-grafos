@@ -7,6 +7,7 @@ class Vertice;
 class Aresta {
 public:
     Aresta();
+    Aresta(Vertice* _inicio, Vertice* _fim, int _peso);
     ~Aresta();
     void setPeso(int val);
     int getPeso();

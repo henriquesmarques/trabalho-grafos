@@ -35,17 +35,22 @@ private:
 
     void inserirVertice(int id, int peso);
     void inserirAresta(Vertice* inicio, Vertice* fim, int peso);
+    void inserirPonteiroAresta(Aresta *a);
     void imprimirVertices();
     void imprimirArestas();
     bool ehCiclico();
     bool auxEhCiclico(Vertice* v, bool* visitados, Vertice* pai);
     void auxNConexo(bool *visitados, Vertice *v);
+    int sortearVertice(int n);
+    int sortearPeso(int n);
+
+    Aresta *inserirArestaAleatoria(int ordem, int peso);
 
     bool auxEhBipartido(int i, int c, int *cor);
     GrafoLista* copiarGrafo();
     Aresta* buscaAresta(int id, int peso);
     Vertice* buscaVertice(int id);
-    Aresta** removerVertice(Vertice* v);
+    void removerVertice(Vertice* v);
     void removerAresta(Aresta* aresta);
 };
 

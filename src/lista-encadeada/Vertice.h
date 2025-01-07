@@ -21,8 +21,11 @@ public:
     Aresta* getAresta(int i);
     int totalArestas();
     void removerAresta(Aresta* a);
+
+    Aresta **copiarVetorArestas();
+
     Aresta* getArestaPara(Vertice* v);
-    Aresta** getVetorArestas() {return arestas;}
+    Aresta** getVetorArestas();
 private:
     int id;
     int peso;

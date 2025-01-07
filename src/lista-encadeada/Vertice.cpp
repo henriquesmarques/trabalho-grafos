@@ -47,6 +47,10 @@ Aresta* Vertice::getAresta(int i) {
     }
 }
 
+Aresta ** Vertice::getVetorArestas() {
+    return arestas;
+}
+
 void Vertice::inserirAresta(Aresta *a) {
     if (n >= tam) {
         aumentarVetor();
@@ -90,7 +94,15 @@ void Vertice::removerAresta(Aresta* a)
     }
     n--;
 
-    cout << "Aresta removida." << endl;
+    //cout << "Aresta removida." << endl;
+}
+
+Aresta** Vertice::copiarVetorArestas() {
+    Aresta** a = new Aresta*[n];
+    for (int i = 0; i < n; i++) {
+        a[i] = getAresta(i);
+    }
+    return a;
 }
 
 Aresta* Vertice::getArestaPara(Vertice* destino) {

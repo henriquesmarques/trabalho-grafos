@@ -2,6 +2,8 @@
 #include "Vertice.h"
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
@@ -55,7 +57,7 @@ void GrafoLista::carrega_grafo() {
         }
     }
 
-    imprimirVertices();
+    //imprimirVertices();
 
     // Criar arestas
     int origem, destino, peso;
@@ -118,12 +120,24 @@ void GrafoLista::inserirAresta(Vertice *inicio, Vertice *fim, int peso) {
         }
         raizAresta = a;
 
-        cout << "Aresta inserida: " << a->getInicio()->getId() << " -> " << a->getFim()->getId() << endl;
+        //cout << "Aresta inserida: " << a->getInicio()->getId() << " -> " << a->getFim()->getId() << endl;
     }
 }
 
+void GrafoLista::inserirPonteiroAresta(Aresta* a) {
+    // Adicionando ponteiro da aresta no vértice
+    a->getInicio()->inserirAresta(a);
+    a->getFim()->inserirAresta(a);
+
+    // Adicionando aresta na lista
+    if (raizAresta != nullptr) {
+        a->setProx(raizAresta);
+    }
+    raizAresta = a;
+}
+
 void GrafoLista::imprimirVertices() {
-    cout << "Lista de vertices: ";
+    cout << "Lista de vertices: " << endl;
     Vertice* v = raizVertice;
     while (v != nullptr) {
         cout << v->getId() << " ";
@@ -250,27 +264,163 @@ bool GrafoLista::eh_arvore() {
     return false;
 }
 
-void GrafoLista::novo_grafo() {
-    /// Bipartido:
-    /// 1. separar em dois grupos
-    /// 2. sortear um de cada gupo para criar uma aresta
-
-
-    /// Sortea uma aresta
-    /// Insere
-    /// Descumpriu algiuma imposição?
-    /// Se não, então continua
-    /// Se sim, remove e sorteia novamente
-
-
-    /// Grafo conexo
-    /// adicionar arestas até o número de componentes ser igual a 1
-
-    /// Aresta ponte
-    /// criar dois grupos
-    /// criar uma aresta que liga eles
+int GrafoLista::sortearVertice(int n) {
+    return rand() % n + 1;
 }
 
-/// Bipartido
-///
-///
+int GrafoLista::sortearPeso(int n) {
+    return rand() % (2 * n + 1) - n;
+}
+
+Aresta* GrafoLista::inserirArestaAleatoria(int ordem, int peso) {
+    Aresta* a = new Aresta(buscaVertice(sortearVertice(ordem)),buscaVertice(sortearVertice(ordem)),peso);
+    while (a->getInicio() == a->getFim()) {
+        a->setInicio(buscaVertice(sortearVertice(ordem)));
+        a->setFim(buscaVertice(sortearVertice(ordem)));
+    }
+    inserirPonteiroAresta(a);
+    return a;
+}
+
+void GrafoLista::novo_grafo() {
+    srand(time(0));
+    ifstream arquivo;
+
+    arquivo.open("C:/Users/henri/CLionProjects/trabalho-grafos/Descricao.txt", ios::in);
+    if (!arquivo.is_open()) {
+        cout << "Erro ao abrir o arquivo!" << endl;
+        exit(1);
+    }
+
+    int grau, ordem, componentesConexas;
+    bool direcionado, verticesPonderados,arestasPonderadas, completo, bipartido, arvore, arestaPonte, verticeArticulacao;
+
+    arquivo >> grau >> ordem >> direcionado >> componentesConexas >> verticesPonderados >> arestasPonderadas >> completo
+            >> bipartido >> arvore >> arestaPonte >> verticeArticulacao;
+
+    this->direcionado = direcionado;
+
+    /*if (verticeArticulacao)
+        ordem--;*/
+
+    // Criando vértices
+    if (verticesPonderados)
+        for (int i = 0; i < ordem; i++)
+            inserirVertice(i+1, sortearPeso(20));
+    else
+        for (int i = 0; i < ordem; i++)
+            inserirVertice(i+1, 1);
+
+    if (completo) {
+        // bipartido = false
+        // arvore = false
+        // arestaPonte = false
+        // verticeArticulacao = false
+        // componenteConexa = 1
+        // grau = ordem - 1
+        if (direcionado) {
+            for (int i = 1; i <= ordem; i++)
+                for (int j = 1; j <= ordem; j++)
+                    if (i != j) {
+                        if (arestasPonderadas)
+                            inserirAresta(buscaVertice(i), buscaVertice(j), sortearPeso(20));
+                        else
+                            inserirAresta(buscaVertice(i), buscaVertice(j), 1);
+                    }
+        }
+        else {
+            for (int i = 1; i <= ordem; i++)
+                for (int j = 1; j <= ordem; j++)
+                    if (i > j) {
+                        if (arestasPonderadas)
+                            inserirAresta(buscaVertice(i), buscaVertice(j), sortearPeso(20));
+                        else
+                            inserirAresta(buscaVertice(i), buscaVertice(j), 1);
+                    }
+        }
+    } else {
+        if (verticeArticulacao)
+            componentesConexas++;
+
+        int compConexo = 0;
+        int _grau = 0;
+        while (compConexo != componentesConexas && _grau != grau) {
+            Aresta *a;
+            if (arestasPonderadas)
+                a = inserirArestaAleatoria(ordem, sortearPeso(20));
+            else
+                a = inserirArestaAleatoria(ordem, 1);
+            compConexo = n_conexo();
+            _grau = getGrau();
+            if (compConexo < componentesConexas || _grau > grau) {
+                removerAresta(a);
+            }
+        }
+
+        if (verticeArticulacao) {
+            ordem++;
+            componentesConexas--;
+
+            if (verticePonderado())
+                inserirVertice(ordem, sortearPeso(20));
+            else
+                inserirVertice(ordem, 1);
+
+            while (compConexo != componentesConexas && _grau != grau) {
+                if (arestasPonderadas)
+                    inserirAresta(buscaVertice(ordem), buscaVertice(sortearVertice(ordem-1)), sortearPeso(20));
+                else
+                    inserirAresta(buscaVertice(ordem), buscaVertice(sortearVertice(ordem-1)), 1);
+                compConexo = n_conexo();
+                _grau = getGrau();
+                if (compConexo < componentesConexas || _grau > grau) {
+                    removerAresta(raizAresta);
+                }
+            }
+        }
+    }
+
+    imprimirVertices();
+    imprimirArestas();
+
+    cout << "Grau: " << getGrau() << endl << "Ordem: " << get_ordem() << endl << "Direcionado: " << eh_direcionado() << endl <<
+        "Componentes conexas: " << n_conexo() << endl << "Vertices ponderados: " << verticePonderado() << endl <<
+        "Arestas ponderadas: " << aresta_ponderada() << endl << "Completo: " << ehCompleto() /*<< endl <<
+        "Bipartido: " << ehBipartido()*/ << endl << "Arvore: " << eh_arvore() /*<< endl << "Aresta Ponte: " <<
+        possuiPonte()*/ << endl << "Vertice de Articulacao: " << possuiArticulacao() << endl;
+}
+
+// Grau
+// Ordem*
+// Direcionado*
+// Vertices ponderados*
+// Arestas ponderadas
+
+// Completo*
+// Componentes conexas
+// Bipartido
+// Arvore
+// Aresta Ponte
+// Vertice de Articulação
+
+
+// Bipartido:
+// Separar em dois grupos
+// Sortear um de cada grupo para criar uma aresta
+
+// Sortear uma aresta
+// Insere
+// Descumpriu alguma imposição?
+// Se não, então continua
+// Se sim, remove e sorteia novamente
+
+// Grafo conexo
+// adicionar arestas até o número de componentes ser igual a 1
+
+// Aresta ponte
+// N componentes conexas - 1
+// criar dois grupos
+// criar uma aresta que liga eles
+
+// Vertice de articulação
+// (adicionar um vertice no final)
