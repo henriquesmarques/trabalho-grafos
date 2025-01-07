@@ -292,18 +292,18 @@ void GrafoLista::novo_grafo() {
         exit(1);
     }
 
-    int grau, ordem, componentesConexas;
-    bool direcionado, verticesPonderados,arestasPonderadas, completo, bipartido, arvore, arestaPonte, verticeArticulacao;
+    int _grau, ordem, _componentes;
+    bool direcionado, verticesPonderados,arestasPonderadas, completo, bipartido, arvore, arestaPonte, _articulacao;
 
-    arquivo >> grau >> ordem >> direcionado >> componentesConexas >> verticesPonderados >> arestasPonderadas >> completo
-            >> bipartido >> arvore >> arestaPonte >> verticeArticulacao;
+    arquivo >> _grau >> ordem >> direcionado >> _componentes >> verticesPonderados >> arestasPonderadas >> completo
+            >> bipartido >> arvore >> arestaPonte >> _articulacao;
 
     this->direcionado = direcionado;
 
-    // Vertice de Articulação
-    if (verticeArticulacao) {
+    // Caso específico para vértice de articulação
+    if (_articulacao) {
         ordem--;
-        componentesConexas++;
+        _componentes++;
     }
 
     // Criando vértices
@@ -314,6 +314,7 @@ void GrafoLista::novo_grafo() {
         for (int i = 0; i < ordem; i++)
             inserirVertice(i+1, 1);
 
+    // Caso específico para grafo completo
     if (completo) {
         // bipartido = false
         // arvore = false
@@ -342,42 +343,57 @@ void GrafoLista::novo_grafo() {
                     }
         }
     } else {
-        int compConexo = 0;
-        int _grau = 0;
-        bool vertArticulacao = false;
-        while (compConexo != componentesConexas && _grau != grau && vertArticulacao != verticeArticulacao) {
+        int componentes = ordem, grau = 0;
+        while (componentes != _componentes || grau != _grau) {
             Aresta *a;
             if (arestasPonderadas)
                 a = inserirArestaAleatoria(ordem, sortearPeso(20));
             else
                 a = inserirArestaAleatoria(ordem, 1);
-            compConexo = n_conexo();
-            _grau = get_grau();
-            vertArticulacao = possui_articulacao();
-            if (compConexo < componentesConexas || _grau > grau) {
+            componentes = n_conexo();
+            grau = get_grau();
+            if (componentes < _componentes || grau > _grau) {
                 removerAresta(a);
             }
         }
 
-        if (verticeArticulacao) {
+        // Verificação se possui vértice de articulação indevido
+        bool articulacao = possui_articulacao();
+        if (_articulacao == false && articulacao == true)
+            while (articulacao != _articulacao || componentes != _componentes || grau != _grau) {
+                Aresta *a;
+                if (arestasPonderadas)
+                    a = inserirArestaAleatoria(ordem, sortearPeso(20));
+                else
+                    a = inserirArestaAleatoria(ordem, 1);
+                componentes = n_conexo();
+                grau = get_grau();
+                articulacao = possui_articulacao();
+                if (componentes < _componentes || grau > _grau) {
+                    removerAresta(a);
+                }
+            }
+
+        // Caso específico para vértice de articulação
+        if (_articulacao) {
             ordem++;
-            componentesConexas--;
+            _componentes--;
 
             if (vertice_ponderado())
                 inserirVertice(ordem, sortearPeso(20));
             else
                 inserirVertice(ordem, 1);
 
-            while (compConexo != componentesConexas && _grau != grau && vertArticulacao != verticeArticulacao) {
+            while (articulacao != _articulacao || componentes != _componentes || grau != _grau) {
                 // Inserir aresta com origem Vértice[Ordem] e destino uma das componentes
                 if (arestasPonderadas)
                     inserirAresta(buscaVertice(ordem), buscaVertice(sortearVertice(ordem-1)), sortearPeso(20));
                 else
                     inserirAresta(buscaVertice(ordem), buscaVertice(sortearVertice(ordem-1)), 1);
-                compConexo = n_conexo();
+                componentes = n_conexo();
                 _grau = get_grau();
-                vertArticulacao = possui_articulacao();
-                if (compConexo > componentesConexas || _grau > grau) {
+                articulacao = possui_articulacao();
+                if (componentes < _componentes || grau > _grau) {
                     removerAresta(raizAresta);
                 }
             }
@@ -394,14 +410,14 @@ void GrafoLista::novo_grafo() {
         possuiPonte()*/ << endl << "Vertice de Articulacao: " << possui_articulacao() << endl;
 }
 
-// Grau
+// Grau*
 // Ordem*
 // Direcionado*
 // Vertices ponderados*
-// Arestas ponderadas
+// Arestas ponderadas*
 
 // Completo*
-// Componentes conexas
+// Componentes conexas*
 // Bipartido
 // Arvore
 // Aresta Ponte
