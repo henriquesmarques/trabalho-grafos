@@ -162,19 +162,23 @@ bool GrafoLista::possui_ponte() {
     int componentesConexas = n_conexo();
     ///laco para realizar a remoção de um no por vez no grafo
     GrafoLista* grafo = copiarGrafo();
-    for (Vertice* v = raizVertice; v != nullptr; v = v->getProx()) {
-            int tam = v->totalArestas();
-            for (int i = 0; i < tam; i++) {
-                Aresta* a = v->getAresta(i);
-                Vertice* destino = a->getFim();
-                ///remove a aresta
-                v->removerAresta(a);
-                destino->removerAresta(destino->getArestaPara(v));
-                int comp2 = n_conexo();
-                if (comp2 > componentesConexas)
-                    return true;
-            }
+
+    for (Aresta* a = raizAresta; a != nullptr; a = a->getProx()) {
+        int inicio = a->getInicio()->getId();
+        int fim = a->getFim()->getId();
+        int peso = a->getPeso();
+        // Remove Aresta
+        grafo->removerAresta(grafo->buscaAresta(inicio, fim));
+        // Verifica se o numero de componentes aumentou
+        int componentes = grafo->n_conexo();
+        if (componentes > componentesConexas) {
+            delete grafo;
+            return true;
+        }
+        // Reinsere aresta no grafo
+        grafo->inserirAresta(grafo->buscaVertice(inicio), grafo->buscaVertice(fim), peso);
     }
+
     delete grafo;
     return false;
 }
@@ -218,17 +222,9 @@ void GrafoLista::removerAresta(Aresta* a) {
     delete a;
 }
 
-Aresta* GrafoLista::buscaAresta(int vert1, int vert2){
-    Vertice* p = buscaVertice(vert1);
-    Aresta* aux = p->getAresta(vert2);
-    if(aux != nullptr){
-        while(aux != nullptr){
-            if(aux->getPeso() == vert2)
-                return aux;
-            aux = aux->getProx();
-        }
-    }
-    return aux;
+Aresta* GrafoLista::buscaAresta(int id_inicio, int id_fim){
+    Vertice* p = buscaVertice(id_inicio);
+    return p->getArestaPara(buscaVertice(id_fim));
 }
 
 Vertice* GrafoLista::buscaVertice(int id){

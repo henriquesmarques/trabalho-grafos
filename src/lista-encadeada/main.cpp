@@ -6,8 +6,12 @@ using namespace std;
 int main() {
 
     GrafoLista g;
-    //g.carrega_grafo();
-    g.novo_grafo();
+    g.carrega_grafo();
+    //g.novo_grafo();
+    if (g.possui_ponte())
+        cout << "Possui." << endl;
+    else
+        cout << "Nao possui." << endl;
 
     //cout << endl << endl;
 
