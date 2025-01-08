@@ -27,7 +27,7 @@ public:
     bool possui_articulacao(); /// Função que diz se possui vertice de articulação
     bool possui_ponte(); /// Função que diz se possui aresta ponte
     bool vertice_ponderado(); /// Função que diz se o no possui peso
-private:
+
     Vertice* raizVertice;
     Aresta* raizAresta;
     bool direcionado;
@@ -42,6 +42,7 @@ private:
     int sortearVertice(int n);
     int sortearPeso(int n);
     Aresta* inserirArestaAleatoria(int ordem, int peso);
+    void dividirVertices(Vertice **grupo1, Vertice **grupo2);
 
     bool auxEhBipartido(int i, int c, int *cor);
     Aresta* buscaAresta(int id, int peso);

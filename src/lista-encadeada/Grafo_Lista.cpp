@@ -2,6 +2,7 @@
 #include "Vertice.h"
 #include <iostream>
 #include <fstream>
+#include <cmath>
 
 using namespace std;
 
@@ -52,40 +53,73 @@ bool GrafoLista::eh_completo() {
 }
 
 bool GrafoLista::eh_bipartido() {
-    /// eh bipartido se seus vértices puderem ser divididos em dois conjuntos disjuntos,
-    /// de forma que não haja arestas entre vértices do mesmo conjunto
+    // Verifica se o grafo é completo; grafos completos não podem ser bipartidos (exceto K_2).
     if (eh_completo())
         return false;
-    int n = get_ordem();
-    int *cor = new int[n];
-    ///Inicializa todos como sem cor = -1
-    for (int i=0;i<n;i++)
-        cor[i]=-1;
-    for (int i=0; i<n; i++) {
-        if (cor[i]==-1) { ///vertice nãoo visitado
-            if (!auxEhBipartido(i, 0, cor)) {
-                delete [] cor;
-                return false;
+
+    int num = get_ordem(); // Número de vértices
+    int cont = pow(2, num); // Total de combinações possíveis
+    int* binario = new int[num]; // Vetor para armazenar a combinação binária
+
+    // Testa todas as combinações possíveis de particionamento
+    for (int i = 1; i < cont; i++) {
+        int valor = i;
+        int aux = 0;
+
+        // Converte o número para binário e armazena no vetor
+        while (valor > 0) {
+            binario[aux++] = valor % 2; // Armazena o resto da divisão por 2
+            valor /= 2;
+        }
+
+        // Preenche os espaços vazios com 0
+        while (aux < num) {
+            binario[aux++] = 0;
+        }
+
+        // Variável para verificar se a combinação atual é bipartida
+        bool ehBipartido = true;
+
+        // Verifica a combinação binária atual
+        for (int j = 0; j < num; j++) {
+            Vertice* v1 = buscaVertice(j + 1); // Obtém o vértice (ajustando para 1-based)
+
+            for (int k = j + 1; k < num; k++) {
+                // Verifica se os vértices estão no mesmo conjunto na partição atual
+                if (binario[j] == binario[k]) {
+                    Vertice* v2 = buscaVertice(k + 1);
+
+                    // Verifica se os vértices são adjacentes
+                    int tam = v1->totalArestas();
+                    for (int l = 0; l < tam; l++) {
+                        if (v1->getAresta(l)->getFim() == v2) {
+                            // Aresta entre vértices do mesmo conjunto; não é bipartido
+                            ehBipartido = false;
+                            break;
+                        }
+                    }
+
+                    if (!ehBipartido) {
+                        break; // Sai do loop interno
+                    }
+                }
+            }
+
+            if (!ehBipartido) {
+                break; // Sai do loop externo
             }
         }
-    }
-    delete [] cor;
-    return true;
-}
 
-bool GrafoLista::auxEhBipartido(int i, int c, int *cor) {
-    cor[i]=c; ///colore o vertice U com a cor c
-    for ( Vertice* vizinho = buscaVertice(i); vizinho!= nullptr; vizinho=vizinho->getProx()) {
-        int id = vizinho->getId();
-        if (cor[id]==-1) {
-            ///se o vertice não foi visitado
-            if (!auxEhBipartido(id, 1-c, cor)) ///se não for possivel colorir com a cor oposta
-                return false;
+        // Se encontramos uma partição válida, o grafo é bipartido
+        if (ehBipartido) {
+            delete[] binario;
+            return true;
         }
-        else if (cor[id] == c) ///se vizinhos possuem a mesma cor
-                return false;
     }
-    return true;
+
+    // Nenhuma partição válida encontrada; o grafo não é bipartido
+    delete[] binario;
+    return false;
 }
 
 bool GrafoLista::possui_articulacao() {

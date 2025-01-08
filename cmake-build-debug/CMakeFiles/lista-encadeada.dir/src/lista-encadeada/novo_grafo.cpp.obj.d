@@ -1,5 +1,8 @@
-CMakeFiles/lista-encadeada.dir/src/lista-encadeada/main.cpp.obj: \
- C:\Users\henri\CLionProjects\trabalho-grafos\src\lista-encadeada\main.cpp \
+CMakeFiles/lista-encadeada.dir/src/lista-encadeada/novo_grafo.cpp.obj: \
+ C:\Users\henri\CLionProjects\trabalho-grafos\src\lista-encadeada\novo_grafo.cpp \
+ C:\Users\henri\CLionProjects\trabalho-grafos\src\lista-encadeada\GrafoLista.h \
+ C:\Users\henri\CLionProjects\trabalho-grafos\src\lista-encadeada\Aresta.h \
+ C:\Users\henri\CLionProjects\trabalho-grafos\src\lista-encadeada\Vertice.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/requires_hosted.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
@@ -150,6 +153,8 @@ CMakeFiles/lista-encadeada.dir/src/lista-encadeada/main.cpp.obj: \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/ostream.tcc \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/istream \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/istream.tcc \
- C:\Users\henri\CLionProjects\trabalho-grafos\src\lista-encadeada\GrafoLista.h \
- C:\Users\henri\CLionProjects\trabalho-grafos\src\lista-encadeada\Aresta.h \
- C:\Users\henri\CLionProjects\trabalho-grafos\src\lista-encadeada\Vertice.h
+ C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/fstream \
+ C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/codecvt.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/basic_file.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/c++io.h \
+ C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/bits/fstream.tcc

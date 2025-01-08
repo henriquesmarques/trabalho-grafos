@@ -3,11 +3,43 @@
 
 using namespace std;
 
+void testarEhCiclico() {
+    GrafoLista grafo;
+
+    // Teste 1: Grafo sem ciclo
+    grafo.inserirVertice(1, 1);
+    grafo.inserirVertice(2, 1);
+    grafo.inserirVertice(3, 1);
+    grafo.inserirAresta(grafo.buscaVertice(1), grafo.buscaVertice(2), 1);
+    grafo.inserirAresta(grafo.buscaVertice(2), grafo.buscaVertice(3), 1);
+    std::cout << "Teste 1 (sem ciclo): " << (grafo.ehCiclico() ? "Falhou" : "Passou") << std::endl;
+
+    // Teste 2: Grafo com ciclo
+    grafo.inserirAresta(grafo.buscaVertice(3), grafo.buscaVertice(1), 1);
+    std::cout << "Teste 2 (com ciclo): " << (grafo.ehCiclico() ? "Passou" : "Falhou") << std::endl;
+
+    // Teste 3: Grafo direcionado sem ciclo
+    GrafoLista grafoDirecionado;
+    grafoDirecionado.inserirVertice(1, 1);
+    grafoDirecionado.inserirVertice(2, 1);
+    grafoDirecionado.inserirVertice(3, 1);
+    grafoDirecionado.inserirAresta(grafoDirecionado.buscaVertice(1), grafoDirecionado.buscaVertice(2), 1);
+    grafoDirecionado.inserirAresta(grafoDirecionado.buscaVertice(2), grafoDirecionado.buscaVertice(3), 1);
+    grafoDirecionado.direcionado = true;
+    std::cout << "Teste 3 (direcionado sem ciclo): " << (grafoDirecionado.ehCiclico() ? "Falhou" : "Passou") << std::endl;
+
+    // Teste 4: Grafo direcionado com ciclo
+    grafoDirecionado.inserirAresta(grafoDirecionado.buscaVertice(3), grafoDirecionado.buscaVertice(1), 1);
+    std::cout << "Teste 4 (direcionado com ciclo): " << (grafoDirecionado.ehCiclico() ? "Passou" : "Falhou") << std::endl;
+}
+
 int main() {
 
     GrafoLista g;
     //g.carrega_grafo();
     g.novo_grafo();
+
+    //testarEhCiclico();
 
     //cout << endl << endl;
 
