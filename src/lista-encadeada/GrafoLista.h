@@ -44,7 +44,6 @@ private:
     Aresta* inserirArestaAleatoria(int ordem, int peso);
     void dividirVertices(Vertice **grupo1, Vertice **grupo2);
 
-    bool auxEhBipartido(int i, int c, int *cor);
     Aresta* buscaAresta(int id, int peso);
     Vertice* buscaVertice(int id);
     GrafoLista* copiarGrafo();
