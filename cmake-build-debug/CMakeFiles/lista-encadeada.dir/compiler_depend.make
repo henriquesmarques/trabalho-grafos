@@ -312,6 +312,7 @@ CMakeFiles/lista-encadeada.dir/src/lista-encadeada/GrafoLista.cpp.obj: C:/Users/
   C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
+  C:/Users/henri/CLionProjects/trabalho-grafos/Grafo.h \
   C:/Users/henri/CLionProjects/trabalho-grafos/src/lista-encadeada/Aresta.h \
   C:/Users/henri/CLionProjects/trabalho-grafos/src/lista-encadeada/GrafoLista.h \
   C:/Users/henri/CLionProjects/trabalho-grafos/src/lista-encadeada/Vertice.h
@@ -488,6 +489,7 @@ CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo_Lista.cpp.obj: C:/Users
   C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
+  C:/Users/henri/CLionProjects/trabalho-grafos/Grafo.h \
   C:/Users/henri/CLionProjects/trabalho-grafos/src/lista-encadeada/Aresta.h \
   C:/Users/henri/CLionProjects/trabalho-grafos/src/lista-encadeada/GrafoLista.h \
   C:/Users/henri/CLionProjects/trabalho-grafos/src/lista-encadeada/Vertice.h
@@ -797,6 +799,7 @@ CMakeFiles/lista-encadeada.dir/src/lista-encadeada/main.cpp.obj: C:/Users/henri/
   C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/x86_64-w64-mingw32/include/vadefs.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/x86_64-w64-mingw32/include/wchar.h \
   C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/x86_64-w64-mingw32/include/wctype.h \
+  C:/Users/henri/CLionProjects/trabalho-grafos/Grafo.h \
   C:/Users/henri/CLionProjects/trabalho-grafos/src/lista-encadeada/Aresta.h \
   C:/Users/henri/CLionProjects/trabalho-grafos/src/lista-encadeada/GrafoLista.h \
   C:/Users/henri/CLionProjects/trabalho-grafos/src/lista-encadeada/Vertice.h
@@ -1035,6 +1038,8 @@ C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32
 C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/cpu_defines.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_base.h:
+
+C:/Users/henri/CLionProjects/trabalho-grafos/Grafo.h:
 
 C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/x86_64-w64-mingw32/bits/ctype_inline.h:
 

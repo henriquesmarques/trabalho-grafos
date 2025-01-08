@@ -1,6 +1,7 @@
 CMakeFiles/lista-encadeada.dir/src/lista-encadeada/Grafo_Lista.cpp.obj: \
  C:\Users\henri\CLionProjects\trabalho-grafos\src\lista-encadeada\Grafo_Lista.cpp \
  C:\Users\henri\CLionProjects\trabalho-grafos\src\lista-encadeada\GrafoLista.h \
+ C:/Users/henri/CLionProjects/trabalho-grafos/Grafo.h \
  C:\Users\henri\CLionProjects\trabalho-grafos\src\lista-encadeada\Aresta.h \
  C:\Users\henri\CLionProjects\trabalho-grafos\src\lista-encadeada\Vertice.h \
  C:/Program\ Files/JetBrains/CLion\ 2024.2.3/bin/mingw/lib/gcc/x86_64-w64-mingw32/13.1.0/include/c++/iostream \

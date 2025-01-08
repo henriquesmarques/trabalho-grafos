@@ -6,17 +6,10 @@ using namespace std;
 int main() {
 
     GrafoLista g;
-    //g.carrega_grafo();
-    g.novo_grafo();
+    g.carrega_grafo();
+    //g.novo_grafo();
 
-    // if (g.possui_ponte())
-    //     cout << "Possui." << endl;
-    // else
-    //     cout << "Nao possui." << endl;
-
-    //cout << endl << endl;
-
-    /*if (g.aresta_ponderada())
+    if (g.aresta_ponderada())
         cout << "Arestas ponderadas." << endl;
     else
         cout << "Arestas nao ponderadas." << endl;
@@ -35,35 +28,34 @@ int main() {
     else
         cout << "Nao eh arvore." << endl;
 
+    cout << endl;
 
-    cout << endl << endl;
-
-    if (g.verticePonderado())
+    if (g.vertice_ponderado())
         cout<< "Vertice Ponderada." << endl;
     else
         cout << "Nao eh vertice ponderada." << endl;
 
-    cout<<"Grau do grafo: " << g.getGrau()<<endl;*/
+    cout<<"Grau do grafo: " << g.get_grau()<<endl;
 
-    /*if (g.ehCompleto())
+    if (g.eh_completo())
         cout << "Eh completo." << endl;
     else
         cout << "Nao eh completo." << endl;
 
-    if (g.ehBipartido())
+    if (g.eh_bipartido())
         cout << "Eh Bipartido." << endl;
     else
-        cout << "Nao eh Bipartido." << endl;*/
+        cout << "Nao eh Bipartido." << endl;
 
-    /*if (g.possuiArticulacao())
+    if (g.possui_articulacao())
         cout << "Possui articulacao." << endl;
     else
         cout << "Nao possui articulacao." << endl;
 
-    if (g.possuiPonte())
+    if (g.possui_ponte())
         cout<< "Possui Ponte." << endl;
     else
-        cout << "Nao possui Ponte." << endl;*/
+        cout << "Nao possui Ponte." << endl;
 
     return 0;
 }

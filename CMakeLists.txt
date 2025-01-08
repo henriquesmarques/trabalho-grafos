@@ -3,7 +3,8 @@ project(trabalho_grafos)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(trabalho_grafos main.cpp)
+add_executable(trabalho_grafos main.cpp
+        Grafo.h)
 add_executable(lista-encadeada
         src/lista-encadeada/Vertice.cpp
         src/lista-encadeada/Vertice.h
@@ -13,4 +14,5 @@ add_executable(lista-encadeada
         src/lista-encadeada/Grafo_Lista.cpp
         src/lista-encadeada/GrafoLista.h
         src/lista-encadeada/main.cpp
+        Grafo.h
 )
