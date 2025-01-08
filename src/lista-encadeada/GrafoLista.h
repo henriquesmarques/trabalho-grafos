@@ -27,7 +27,7 @@ public:
     bool possui_articulacao(); /// Função que diz se possui vertice de articulação
     bool possui_ponte(); /// Função que diz se possui aresta ponte
     bool vertice_ponderado(); /// Função que diz se o no possui peso
-
+private:
     Vertice* raizVertice;
     Aresta* raizAresta;
     bool direcionado;
